@@ -6,7 +6,7 @@
     <meta name="description" content="Learn words">
     <meta name="author" content="Anatolii Merezhanyi">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+
 	<link id="page_favicon" href="favicon.ico" rel="icon" type="image/x-icon" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
@@ -50,7 +50,7 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-	
+
 	<div id="summary" data-toggle="nav" class="row">
 		<div class="col-md-12 content">
 			<h4><span data-lang="totalWords" data-toggle="lang">Total words</span>: <span id="totalWordsNum" class="num-words"></span></h4>
@@ -58,7 +58,7 @@
 			<h4><span data-lang="repeatWords" data-toggle="lang">Words to repeat</span>: <span id="repeatWordsNum" class="num-words"></span></h4>
 		</div>
 	</div>
-	
+
 	<div id="learn" data-toggle="nav" class="center nodisplay">
 		<div id="learnWordsGrp">
 			<div class="row">
@@ -87,14 +87,28 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="repeat" data-toggle="nav" class="center nodisplay">
 		<div id="checkWord" class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<h3 id="checkWordInp" data-id="" data-direction=""></h3>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+				<div class="row row-content">
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+				</div>
+				<div class="row row-content" style="margin-top:10px;">
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+				</div>
+				<div id=feedback></div>
 			</div>
 		</div>
 		<div id="enterWord" class="row nodisplay">
@@ -112,7 +126,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="vocabulary" data-toggle="nav" class="center nodisplay">
 		<div class="row">
 			<form id="addWordForm" role="form">
@@ -142,7 +156,7 @@
 		<div id="vocabularyBox" class="">
 		</div>
 	</div>
-	
+
 	<div id="settings" data-toggle="nav" class="center nodisplay">
 		<div class="row">
 			<div class="col-md-12">
