@@ -24,11 +24,26 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 		noWordsRepeat: $('#noWordsRepeat'),
 		enterBtn: $('#enterBtn'),
 		
+		answerWasCorrectFeedback: function(correct)
+		{
+			$('#feedback').show();
+			
+			var answerType = "wrong";
+			if(correct)
+			{
+				answerType = "correct";
+			}
+			$('#feedback').html('<img src="media/symbols/' + answerType + '.png">');
+			var audio = new Audio('media/sound/' + answerType + '.mp3');
+			audio.play();
+
+			return true;
+		},
+		
 		recountIndexRepeat: function(){ //count words to Repeat
 			if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
 				$(wordsIndex).each(function(index, node){ //the initial counting
 					var item = localStorageAPI.readItem('learnWords-'+node);
-					
 					if (Utils.getToday() > item.date) { //if this word is for today
 						if (item.step == 1) {
 							Repeat.wordsRepeat.first.push(item);
@@ -48,20 +63,42 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			$(repeatWordsTopSNum).text(wordsRepeatLength);
 		},
 		
+		getWord: function(index, arrWords){
+			//if index is 0 we get the correct word. The other words are random
+			if (index == 0) {
+				wordPlaceholder = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0][(Repeat.wordsRepeat.first.length) ? 'translate' : 'word'];
+			} else {
+				wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][Utils.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length-1)];	
+			}
+			
+			if(arrWords.indexOf(wordPlaceholder) >= 0)
+			{
+				Repeat.getWord(index, arrWords);
+			}
+			
+			return wordPlaceholder;
+		},
+		
 		showWord: function(){ //show a next word to Repeat
 			if (Repeat.wordsRepeat.first.length || Repeat.wordsRepeat.second.length) {
 				var id = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].index,
 					wordPlaceholder = '';
-				
+				var arrWords = new Array();	
 				$(checkWordInp).text(Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0][(Repeat.wordsRepeat.first.length) ? 'word' : 'translate']).data('id', id);
-				$('[data-type=checkWordBtn]').each(function(index, node){
-					if (index == Utils.getRandomInt(0, 2)) {
-						wordPlaceholder = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0][(Repeat.wordsRepeat.first.length) ? 'translate' : 'word'];
-					} else {
-						wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][Utils.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length-1)];
-					}
+				
+				var arrOptionButtons = $('[data-type=checkWordBtn]');
+				//the answer buttons are shuffled so that we don't know which one is the correct word.
+				Utils.shuffle(arrOptionButtons);
+				
+				arrOptionButtons.each(function(index, node){
+
+					wordPlaceholder = Repeat.getWord(index, arrWords);
+					
+					arrWords[index] = wordPlaceholder;	
+					
 					$(this).text(wordPlaceholder);
 				});
+				
 				$(enterBtn).data('direction', true);
 				$(checkWord).removeClass('nodisplay');
 				$(enterWord).addClass('nodisplay');
@@ -109,19 +146,25 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				};
 			
 			if ($(self).text() == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
+				Repeat.answerWasCorrectFeedback(true);
 				word.step++;
 				word.date = Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
 			} else {
+				Repeat.answerWasCorrectFeedback(false);
 				word.step--;
 				word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + 864000000 * Settings.params.first;
 			}
-			localStorageAPI.storeItem('learnWords-'+word.index, word); //save word
-			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
-			Learn.wordsLearn = [];
-			Learn.recountIndexLearn();
-			Learn.showWord();
-			Repeat.recountIndexRepeat();
-			Repeat.showWord();
+			
+			 setTimeout(function () {
+				$('#feedback').hide();
+				localStorageAPI.storeItem('learnWords-'+word.index, word); //save word
+				Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
+				Learn.wordsLearn = [];
+				Learn.recountIndexLearn();
+				Learn.showWord();
+				Repeat.recountIndexRepeat();
+				Repeat.showWord();
+			}, 2000);
 		},
 		
 		repeatWord: function(){
