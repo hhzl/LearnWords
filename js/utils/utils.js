@@ -45,7 +45,26 @@ if(typeof(Utils) == 'undefined' || Utils == null || !Utils){
 			if ($('#bs-example-navbar-collapse-1').hasClass('in')) {
 				$('#navbarToggle').click();
 			}
-		}
+		},
+		
+		dump: function(obj) {
+		    var out = '';
+		    for (var i in obj) {
+		        out += i + ": " + obj[i] + "|\n";
+		    }
+		    
+		    console.log(out);
+		},		
+		
+		shuffle: function(a) {
+			 var j, x, i;
+		    for (i = a.length; i; i--) {
+		        j = Math.floor(Math.random() * i);
+		        x = a[i - 1];
+		        a[i - 1] = a[j];
+		        a[j] = x;
+		    }		   
+		}		
 	};
 }
 
