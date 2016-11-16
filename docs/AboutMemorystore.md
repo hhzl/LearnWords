@@ -323,13 +323,13 @@ theWords.forEach(function(element){
   element.index = "index"+i;
   element.step = 0;
   element.date = 0;
-  localStorageAPI.storeItem('learnWords-'+element.index, element);
+  LW.wdsDB.put('learnWords-'+element.index, element);
   arrayOfKeys.push(element.index);
 }
 
 );
 
-localStorageAPI.storeItem('learnWords-words', arrayOfKeys.join());
+LW.wdsDB.put('learnWords-words', arrayOfKeys.join());
 
 console.log(arrayOfKeys.length + " words loaded from memorystore.js");
 }
