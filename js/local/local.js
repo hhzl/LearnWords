@@ -5,6 +5,7 @@
 * Placed in public domain.
 **************************************************/
 if(typeof(local) == 'undefined' || local == null || !local){
+console.log("define local");
 	local = {
 	
 		en_GB: {
@@ -122,13 +123,14 @@ if(typeof(local) == 'undefined' || local == null || !local){
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
 			local.changeLocalContent();
-			LW.db.storeItem('learnWords-language', local.currentLocal);
+			LW.db.storeItem(LW.db.name+'-language', local.currentLocal);
 			$(this).addClass('selected');
 			return false;
 		},
 		
 		init: function(){
-			local.currentLocal = LW.db.readItem('learnWords-language');
+                        var settings = LW.db.getSettings(); // to force initialisation.
+			local.currentLocal = LW.db.readItem(LW.db.name+'-language');
 			$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
 		}
 	}

@@ -52,13 +52,13 @@ LW.db = {
 	
 	
 	        putSettings: function(theSettingsObj){
-                    	LW.db.storeItem('learnWords-words-settings', theSettingsObj);
+                    	LW.db.storeItem(LW.db.name+'-words-settings', theSettingsObj);
 		},
 
 
 		getSettings: function(){
 			
-			var settings = LW.db.readItem('learnWords-words-settings');
+			var settings = LW.db.readItem(LW.db.name+'-words-settings');
                         if (!settings) {
                             // the app runs for the first time, thus
 			    // initialize the setting object neeeds to be initialized
@@ -71,14 +71,14 @@ LW.db = {
 
                             // Note: box 0 is for the Learn mode and it not set 
                             // as the words are accessible all the time
-                      
+                            console.log('initialize settings');
 			    settings = {
         				first : 1,
         				second: 3,
         				third: 7
     			     };
-    			     LW.db.storeItem('learnWords-settings', settings);
-    			     LW.db.storeItem('learnWords-language', 'en_GB');
+    			     LW.db.storeItem(LW.db.name+'-settings', settings);
+    			     LW.db.storeItem(LW.db.name+'-language', 'en_GB');
 
                         };
 
@@ -98,12 +98,12 @@ LW.db = {
   					 element.index = "index"+i;
   					 element.step = 0;
   					 element.date = 0;
-  					 LW.db.put('learnWords-'+element.index, element);
+  					 LW.db.storeItem(LW.db.name+'-'+element.index, element);
   					 arrayOfKeys.push(element.index);
 					}
 				);
 
-                                LW.db.put('learnWords-words', arrayOfKeys.join());
+                                LW.db.storeItem(LW.db.name+'-words', arrayOfKeys.join());
                                 LW.db.index = arrayOfKeys; 
 
                                 console.log(arrayOfKeys.length + " words loaded");
@@ -118,41 +118,6 @@ LW.db = {
 			}
 		},
 
-                removeWords: function(){
-			if (LW.db.isOK) {
-                        "use strict";
-                        var key;
-                        var st; 
-                        var keysToDelete = [];
-
-                        var prefixForNumber = 'learnWords-index';  
-
-                        // go through all keys starting with the name
-                        // of the database, i.e 'learnWords-index14'
-                        for (var i = 0; i < localStorage.length; i++){
-                            key = localStorage.key(i);
-                            st = localStorage.getItem(key);                            
-    
-                            if (key.lastIndexOf(prefixForNumber,0) === 0) {
-                                keysToDelete.push(key);
-                            };
-			};
-                        // now we have all the keys which should be deleted
-                        // in the array keysToDelete.
-                        console.log(keysToDelete);
-                        keysToDelete.forEach(function(aKey){
-                             localStorage.removeItem(aKey);
-			});
-
-                        // reset index
-                        localStorage.setItem('learnWords-words', '');
-
-                        // this one triggers that memorystore is executed
-                        localStorage.removeItem('learnWords-settings');
-                        }
-
-		},
-
 
                 dumpWords: function(aKeyPrefix) {
 		           if (LW.db.isOK) {
@@ -161,7 +126,7 @@ LW.db = {
                             var strValue; 
                             var result = [];
 
-                            var prefixForNumber = 'learnWords-index';  
+                            var prefixForNumber = LW.db.name+'-index';  
 
                             // go through all keys starting with the name
                             // of the database, i.e 'learnWords-index14'
@@ -181,16 +146,69 @@ LW.db = {
                 },	
 
 
+
+
+		removeObjects: function(aKeyPrefix){
+			if (LW.db.isOK) {
+                         var key;
+                         var st; 
+                         var keysToDelete = [];
+
+                         // go through all keys starting with the name
+                         // of the database, i.e 'learnWords-index14'
+                         for (var i = 0; i < localStorage.length; i++){
+                            key = localStorage.key(i);
+                            st = localStorage.getItem(key);                             
+    
+                            if (key.lastIndexOf(aKeyPrefix,0) === 0) {
+                                keysToDelete.push(key);
+                            };
+			 };
+                         // now we have all the keys which should be deleted
+                         // in the array keysToDelete.
+                         console.log(keysToDelete);
+                         keysToDelete.forEach(function(aKey){
+                              localStorage.removeItem(aKey);
+			 });
+                       }
+		},
+
+
+		removeWords: function(){
+
+                        var aKeyPrefix = LW.db.name+'-index';  
+                        LW.db.removeObjects(aKeyPrefix);
+
+                        // reset index
+                        localStorage.setItem(LW.db.name+'-words', '');
+
+                        // this one triggers that memorystore is executed
+                        localStorage.removeItem(LW.db.name+'-settings');
+
+		},
+
+
+
+		destroy: function(){
+
+                        var aKeyPrefix = LW.db.name;  
+
+                        LW.db.removeObjects(aKeyPrefix);
+
+		},
+
+
 		
-		init: function(){
+		init: function(dbName){
 			LW.db.isOK = false;
 			if (!LW.db.isLocalStorageAvailable()) {
 				alert('Local Storage is not available.');
 				return false;
 			};
+			LW.db.name = dbName;
                         // get index
                         LW.db.index = [];
-                        var strIndex = localStorage.getItem('learnWords-words');
+                        var strIndex = localStorage.getItem(LW.db.name+'-words');
                         if (strIndex) {LW.db.index = strIndex.split(',')};
 			LW.db.isOK = true;
 		}
@@ -198,6 +216,6 @@ LW.db = {
 	
 
 // initialize database sub-object
-LW.db.init();
+LW.db.init("LWdb");
 
 
