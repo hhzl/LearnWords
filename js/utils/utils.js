@@ -73,8 +73,22 @@ if(typeof(LW.Utils) == 'undefined' || LW.Utils == null || !LW.Utils){
 		        a[j] = x;
 		    }		   
 		},
+		playAudio: function(src) {
 
-                delay: 864000000     //    Utils.delay = 24h * 60m * 60s * 100μs	
+			var isCordovaApp = !!window.cordova;
+			var my_media = null;
+
+			if(isCordovaApp)
+			{
+				my_media = new Media(cordova.file.applicationDirectory + "www/" + src);
+			}
+			else
+			{
+				my_media = new Audio(src);
+			}
+			my_media.play();
+		},
+        delay: 864000000     //    Utils.delay = 24h * 60m * 60s * 100μs	
 	};
 }
 

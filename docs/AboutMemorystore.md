@@ -50,12 +50,12 @@ This gives a literal array of objects.
 
 ## Step 2
 
-In step 1 we got an array.
-Add an assignment in front ``var theWords=``.
+In step 1 we got an array of objects.
+It should look like the following code.
 
 ````JavaScript
 
-var theWords = [
+[
   {
     "word": "Apfel",
     "translate": "apple"
@@ -140,7 +140,7 @@ var theWords = [
     "word": "Brombeere",
     "translate": "blackberry"
   }
-];
+]
 
 ````
 
@@ -152,62 +152,29 @@ and paste the following code into it.
 
 
 ````JavaScript
+if (LW.db.isEmpty()) {
 
-/**************************************************
-* Learn Words // memorystore.js
-* 
-* Example of a user generated file
-*
-* Your name, data
-*
-* License note
-**************************************************/
+LW.db.loadWords(
 
-if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 'undefined' || localStorageAPI.readItem('learnWords-settings') == null)) {
-    settings = {
-        first : 1,
-        second: 3,
-        third: 7
-    };
-    localStorageAPI.storeItem('learnWords-settings', settings);
+````
 
-    localStorageAPI.storeItem('learnWords-language', 'en_GB');
+Then add what you have got from step 3.
 
+And finally add the closing parenthesis
 
-
-// /////////////////////////////
-// Insert code from step 2 here
-// /////////////////////////////
-
-
-var i= 0;
-var arrayOfKeys = [];
-
-theWords.forEach(function(element){
-  i = i + 1;
-  element.index = "index"+i;
-  element.step = 0;
-  element.date = 0;
-  localStorageAPI.storeItem('learnWords-'+element.index, element);
-  arrayOfKeys.push(element.index);
-}
+````JavaScript
 
 );
-
-localStorageAPI.storeItem('learnWords-words', arrayOfKeys.join());
-
-console.log(arrayOfKeys.length + " words loaded from memorystore.js");
 }
 
 ````
 
 
 ## Step 4
-Paste the code from step 2 at the right place in the file of step3. 
-The result should look like the code below. Save the file.
+
+If you have got everything correct the result should look like
 
 ````JavaScript
-
 /**************************************************
 * Learn Words // memorystore.js
 * 
@@ -218,17 +185,12 @@ The result should look like the code below. Save the file.
 * Placed in public domain.
 **************************************************/
 
-if (LW.wdsDB.isOK && (LW.wdsDB.get('learnWords-settings') == 'undefined' || LW.wdsDB.get('learnWords-settings') == null)) {
-    settings = {
-        first : 1,
-        second: 3,
-        third: 7
-    };
-    LW.wdsDB.put('learnWords-settings', settings);
 
-    LW.wdsDB.put('learnWords-language', 'en_GB');
+if (LW.db.isEmpty()) {
 
-var theWords = [
+LW.db.loadWords(
+
+[
   {
     "word": "Apfel",
     "translate": "apple"
@@ -313,25 +275,10 @@ var theWords = [
     "word": "Brombeere",
     "translate": "blackberry"
   }
-];
+]
 
-var i= 0;
-var arrayOfKeys = [];
-
-theWords.forEach(function(element){
-  i = i + 1;
-  element.index = "index"+i;
-  element.step = 0;
-  element.date = 0;
-  LW.wdsDB.put('learnWords-'+element.index, element);
-  arrayOfKeys.push(element.index);
-}
 
 );
-
-LW.wdsDB.put('learnWords-words', arrayOfKeys.join());
-
-console.log(arrayOfKeys.length + " words loaded from memorystore.js");
 }
 
 ````
@@ -340,7 +287,7 @@ console.log(arrayOfKeys.length + " words loaded from memorystore.js");
 
 ## Step 5
 
-Open the app by starting ``index.html``.
+Now open the app by starting ``index.html``.
 If it is the first time you start the program your new memorystore.js
 code is loaded.
 
@@ -351,7 +298,9 @@ Open 'Developer tools' in the browser and 'web console'.
 
 Execute
 
-    localStorageAPI.removeWords();
+    LW.db.removeWords();
 
-Then open ``index.html``. All your new words should appear in the 'Learn' mode.
+
+Then close the page and reopen ``index.html``. All your new words should appear in the 'Learn' mode.
+
 

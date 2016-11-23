@@ -7,6 +7,11 @@
 *
 * Placed in public domain.
 **************************************************/
+settings = {
+		first : 1,
+		second: 3,
+		third: 7
+	};
 
 
 if (LW.db.isEmpty()) {

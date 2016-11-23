@@ -408,8 +408,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				answerType = "correct";
 			}
 			$('#feedback').html('<img src="media/symbols/' + answerType + '.png">');
-			var audio = new Audio('media/sound/' + answerType + '.mp3');
-			audio.play();
+			Utils.playAudio("media/sound/" + answerType + ".mp3");
 
 			return true;
 		},
