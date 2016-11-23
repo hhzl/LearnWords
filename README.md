@@ -4,9 +4,11 @@ LearnWords
 <i>Started - March 2014.</i> One page app for words learning by Leitner system.<br>
 Developed with Twitter Bootstrap and jQuery. Responsive design, local storage, hashtag navigation, HTML-templates, localization.
 
+## Author
+Anatol Marezhanyi https://github.com/e1r0nd
+
 ## Contributors
-Anatol Marezhanyi https://github.com/e1r0nd <br>
-Hannes Hirzel https://github.com/hhzl<br>
+Hannes Hirzel https://github.com/hhzl
 
 ## License
 [MIT License](LICENSE.md) 
