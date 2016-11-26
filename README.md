@@ -9,6 +9,7 @@ Anatol Marezhanyi https://github.com/e1r0nd
 
 ## Contributors
 Hannes Hirzel https://github.com/hhzl
+Kersing Huang
 
 ## License
 [MIT License](LICENSE.md) 
