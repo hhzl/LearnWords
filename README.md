@@ -8,7 +8,7 @@ Developed with Twitter Bootstrap and jQuery. Responsive design, local storage, h
 Anatol Marezhanyi https://github.com/e1r0nd
 
 ## Contributors
-Hannes Hirzel https://github.com/hhzl
+Hannes Hirzel https://github.com/hhzl<br>
 Kersing Huang
 
 ## License
