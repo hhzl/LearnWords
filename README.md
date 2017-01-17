@@ -14,5 +14,8 @@ Anatol Marezhanyi https://github.com/e1r0nd
 Hannes Hirzel https://github.com/hhzl<br>
 Kersing Huang
 
+## Documentation
+[How to create a file memorystore.js](AboutMemorystore.md)
+
 ## License
 [MIT License](LICENSE.md) 
