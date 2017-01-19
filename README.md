@@ -1,4 +1,4 @@
-# LearnWords
+# LearnWords [![Coverage Status](https://coveralls.io/repos/github/e1r0nd/LearnWords/badge.svg?branch=master)](https://coveralls.io/github/e1r0nd/LearnWords?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/e1r0nd/learnwords/badge.svg)](https://snyk.io/test/github/e1r0nd/learnwords)
 
 ## TL;DR
 One page application for learning words by Leitner system.
