@@ -1,11 +1,26 @@
 {
   "name": "learnwords",
   "version": "1.0.0",
+  "private": true,
+  "author": "Anatol Marezhanyi aka e1r0nd//[CRG]",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0",
+    "npm": "^3.0.0"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server app/ -a 0.0.0.0 -p 8000 -o",
+    "test": "mocha -R spec --recursive test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e1r0nd/learnwords.git"
+  },
   "dependencies": {
+    "http-server": "^0.9.0",
+    "materialize-css": "^0.97.8",
     "mocha": "^3.2.0"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "mocha -R spec --recursive test"
-  }
+  "devDependencies": {}
 }
