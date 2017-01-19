@@ -6,10 +6,17 @@
     <meta name="description" content="Learn words">
     <meta name="author" content="Anatolii Merezhanyi">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+
 	<link id="page_favicon" href="favicon.ico" rel="icon" type="image/x-icon" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+
     <link href="css/styles.css" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
@@ -50,7 +57,7 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-	
+
 	<div id="summary" data-toggle="nav" class="row">
 		<div class="col-md-12 content">
 			<h4><span data-lang="totalWords" data-toggle="lang">Total words</span>: <span id="totalWordsNum" class="num-words"></span></h4>
@@ -58,7 +65,7 @@
 			<h4><span data-lang="repeatWords" data-toggle="lang">Words to repeat</span>: <span id="repeatWordsNum" class="num-words"></span></h4>
 		</div>
 	</div>
-	
+
 	<div id="learn" data-toggle="nav" class="center nodisplay">
 		<div id="learnWordsGrp">
 			<div class="row">
@@ -87,7 +94,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="repeat" data-toggle="nav" class="center nodisplay">
 		<div id="checkWord" class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -112,7 +119,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="vocabulary" data-toggle="nav" class="center nodisplay">
 		<div class="row">
 			<form id="addWordForm" role="form">
@@ -142,7 +149,7 @@
 		<div id="vocabularyBox" class="">
 		</div>
 	</div>
-	
+
 	<div id="settings" data-toggle="nav" class="center nodisplay">
 		<div class="row">
 			<div class="col-md-12">
@@ -174,6 +181,7 @@
 
 <script src="js/lib/jquery-1.11.0.min.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 
 <script src="js/utils/LWdb.js"></script>
 <script src="js/utils/utils.js"></script>
