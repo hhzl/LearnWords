@@ -28,7 +28,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
         params: {},
 
         getSettings: function() { //read setting's values
-            var settings = LW.db.getSettings();
+            var settings = LW.getSettings();
 
             $(Settings.inputFirstCheck).val(settings.first);
             $(Settings.inputSecondCheck).val(settings.second);
@@ -79,7 +79,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                     second: second,
                     third: third
                 };
-                LW.db.putSettings(settings);
+                LW.putSettings(settings);
                 $(Settings.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
 
                 Settings.params = settings; //store local
@@ -119,8 +119,8 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
             recountIndexLearn: function() { //count words to learn
                 "use strict";
                 if (!Learn.wordsLearn.length) {
-                    $(LW.db.index).each(function(index, node) { //the initial counting
-                        var item = LW.db.readItem(LW.db.name+'-' + node);
+                    $(LW.index).each(function(index, node) { //the initial counting
+                        var item = LW.readItem(LW.name+'-' + node);
                         if (item) {
                             if (item.step == 0) {
                                 Learn.wordsLearn.push(item);
@@ -159,7 +159,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                         date: (step == 1) ? (Utils.getToday() + Utils.delay * Settings.params.first) : 0
                     };
 
-                    LW.db.storeItem(LW.db.name+'-' + Learn.wordsLearn[Learn.currentIndex].index, word); //save word
+                    LW.storeItem(LW.name+'-' + Learn.wordsLearn[Learn.currentIndex].index, word); //save word
 
                     if (reindex) {
                         Learn.wordsLearn.splice(Learn.currentIndex, 1); //remove from index
@@ -229,8 +229,8 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                 //count words to Repeat
                 "use strict";
                 if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
-                    $(LW.db.index).each(function(index, node) { //the initial counting
-                        var item = LW.db.readItem(LW.db.name+'-' + node);
+                    $(LW.index).each(function(index, node) { //the initial counting
+                        var item = LW.readItem(LW.name+'-' + node);
                         if (item) {
                             if (Utils.getToday() > item.date) { //if this word is for today
 
@@ -309,7 +309,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                 if (step) {
 
 
-                    LW.db.storeItem(LW.db.name+'-' + Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
+                    LW.storeItem(LW.name+'-' + Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
 
                     if (reindex) {
                         Repeat.wordsRepeat.splice(Repeat.currentIndex, 1); //remove from index
@@ -342,7 +342,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                     word.step--;
                     word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + Utils.delay * Settings.params.first;
                 }
-                LW.db.storeItem(LW.db.name+'-' + word.index, word); //save word
+                LW.storeItem(LW.name+'-' + word.index, word); //save word
                 Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
                 Learn.wordsLearn = [];
                 Learn.recountIndexLearn();
@@ -365,7 +365,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                     word.step--;
                     word.date = Utils.getToday() + Utils.delay * Settings.params.second;
                 };
-                LW.db.storeItem(LW.db.name+'-' + word.index, word); //save word
+                LW.storeItem(LW.name+'-' + word.index, word); //save word
                 Repeat.wordsRepeat.third.splice(0, 1); //remove from index
                 Learn.wordsLearn = [];
                 Learn.recountIndexLearn();
@@ -424,7 +424,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
             translates: [],
 
             recountTotal: function() {
-                $(Vocabulary.totalWordsNum).text(LW.db.index.length);
+                $(Vocabulary.totalWordsNum).text(LW.index.length);
             },
 
             removeWord: function(self, notReindex) { //remove word from vocabulary
@@ -432,10 +432,10 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                     node = $(self).data('node');
 
                 if (!notReindex) {
-                    LW.db.index.splice(id, 1); //remove from index
-                    LW.db.storeItem(LW.db.name+'-words', LW.db.index.join());
+                    LW.index.splice(id, 1); //remove from index
+                    LW.storeItem(LW.name+'-words', LW.index.join());
                 }
-                LW.db.removeItem(LW.db.name+'-' + node); //remove this word
+                LW.removeItem(LW.name+'-' + node); //remove this word
                 $('#' + node).remove();
                 $('#' + node + 'Edit').remove();
                 Vocabulary.recountTotal();
@@ -455,10 +455,10 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
             viewWord: function() {
                 var contentInner = '';
 
-                $(LW.db.index).each(function(index, node) {
+                $(LW.index).each(function(index, node) {
                     "use strict";
                     var txt, translate;
-                    var item = LW.db.readItem(LW.db.name+'-' + node);
+                    var item = LW.readItem(LW.name+'-' + node);
                     if (item) {
                         txt = item.word;
                         translate = item.translate;
@@ -505,13 +505,13 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                     };
 
                     // save newly added word
-                    newIndexVal = 'index' + (LW.db.index.length + 1);
-                    LW.db.storeItem(LW.db.name+'-' + newIndexVal, word);
+                    newIndexVal = 'index' + (LW.index.length + 1);
+                    LW.storeItem(LW.name+'-' + newIndexVal, word);
 
-                    var contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g, todayDate).replace(/{{txt}}/g, inputWord).replace(/{{translate}}/g, inputTranslate).replace(/{{index}}/g, (addWord) ? LW.db.index.length : LW.db.index.indexOf(inputWord));
+                    var contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g, todayDate).replace(/{{txt}}/g, inputWord).replace(/{{translate}}/g, inputTranslate).replace(/{{index}}/g, (addWord) ? LW.index.length : LW.index.indexOf(inputWord));
 
                     if (addWord) {
-                        LW.db.index.push(newIndexVal);
+                        LW.index.push(newIndexVal);
                         wordTxt.val('');
                         translate.val('');
                         $(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
@@ -520,12 +520,12 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                     } else {
                         var id = wordTxt.attr('id').slice(5);
 
-                        LW.db.index[LW.db.index.indexOf(id)] = newIndexVal;
+                        LW.index[LW.index.indexOf(id)] = newIndexVal;
                         $('#' + id).before(contentInner);
                         Vocabulary.removeWord($('#del-' + id), true);
                     }
 
-                    LW.db.storeItem(LW.db.name+'-words', LW.db.index.join()); //add word to Vocabulary list
+                    LW.storeItem(LW.name+'-words', LW.index.join()); //add word to Vocabulary list
                     Utils.clearFields();
                     Vocabulary.recountTotal();
                     Learn.wordsLearn = [];
@@ -553,4 +553,3 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
 
         Vocabulary.init();
     }
-

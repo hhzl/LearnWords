@@ -7,7 +7,7 @@
 if(typeof(local) == 'undefined' || local == null || !local){
 console.log("define local");
 	local = {
-	
+
 		en_GB: {
 			summary: 'Summary',
 			learn: 'Learn',
@@ -40,7 +40,7 @@ console.log("define local");
 			enterBtn: 'Check',
 			allWordsDone: 'No more words for repeat.'
 		},
-		
+
 		ru_RU: {
 			summary: 'Сводка',
 			learn: 'Учить',
@@ -73,7 +73,7 @@ console.log("define local");
 			enterBtn: 'Проверить',
 			allWordsDone: 'Нет больше слов для повторения.'
 		},
-		
+
 		de_DE: {
 			summary: 'Summe',
 			learn: 'Lernen',
@@ -109,7 +109,7 @@ console.log("define local");
 		changeLocalContent: function(){ // change inner content
 			var langNode = $('[data-toggle=lang]'),
 				langSelect = $('[data-type=lang-select]');
-			
+
 			$(langNode).each(function(i, node){
 				$(node).text(local[local.currentLocal][$(node).data('lang')]);
 			});
@@ -117,23 +117,23 @@ console.log("define local");
 				$(node).removeClass('selected');
 			});
 		},
-		
+
 		langSelect: function(){ //change localization
 			local.currentLocal = $(this).data('lang');
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
 			local.changeLocalContent();
-			LW.db.storeItem(LW.db.name+'-language', local.currentLocal);
+			LW.storeItem(LW.name+'-language', local.currentLocal);
 			$(this).addClass('selected');
 			return false;
 		},
-		
+
 		init: function(){
-                        var settings = LW.db.getSettings(); // to force initialisation.
-			local.currentLocal = LW.db.readItem(LW.db.name+'-language');
+                        var settings = LW.getSettings(); // to force initialisation.
+			local.currentLocal = LW.readItem(LW.name+'-language');
 			$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
 		}
 	}
-	
+
 	local.init();
 }

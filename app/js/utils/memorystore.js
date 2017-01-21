@@ -1,17 +1,17 @@
 /**************************************************
 * Learn Words // memorystore.js
-* 
-* Load initial set of German words with 
+*
+* Load initial set of German words with
 * English translation.
-* 
+*
 **************************************************/
 
 "use strict";
 
-if (LW.db.isOK && LW.db.isEmpty) {
+if (LW.isOK && LW.isEmpty) {
         console.log('memorystore: start loading words');
 
-LW.db.loadWords(
+LW.loadWords(
 [
 {"index":"index1","word":"das Auto","translate":"car","step":0,"date":0},
 {"index":"index2","word":"laufen","translate":"run","step":0,"date":0},
@@ -24,6 +24,6 @@ LW.db.loadWords(
 {"index":"index13","word":"sauer","translate":"sour","step":2,"date":0},
 {"index":"index14","word":"fliegen","translate":"fly","step":3,"date":0}
 ]
-); 
-	
+);
+
 }
