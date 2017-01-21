@@ -53,10 +53,10 @@ var bundle =
 	**************************************************/
 	__webpack_require__(1);
 	__webpack_require__(2);
-	__webpack_require__(5);
 	__webpack_require__(3);
-	__webpack_require__(6);
 	__webpack_require__(4);
+	__webpack_require__(5);
+	__webpack_require__(6);
 
 	// read settings
 	Settings.getSettings();
@@ -357,6 +357,41 @@ var bundle =
 /***/ function(module, exports) {
 
 	/**************************************************
+	* Learn Words // memorystore.js
+	*
+	* Load initial set of German words with
+	* English translation.
+	*
+	**************************************************/
+
+	"use strict";
+
+	if (LW.isOK && LW.isEmpty) {
+	        console.log('memorystore: start loading words');
+
+	LW.loadWords(
+	[
+	{"index":"index1","word":"das Auto","translate":"car","step":0,"date":0},
+	{"index":"index2","word":"laufen","translate":"run","step":0,"date":0},
+	{"index":"index3","word":"alt","translate":"old","step":0,"date":0},
+	{"index":"index4","word":"krank","translate":"sick","step":0,"date":0},{"index":"index5","word":"heute","translate":"today","step":0,"date":0},{"index":"index6","word":"schreiben","translate":"write","step":0,"date":0},{"index":"index7","word":"hell","translate":"light","step":0,"date":0},
+	{"index":"index8","word":"reich","translate":"rich","step":0,"date":0},
+	{"index":"index9","word":"süß","translate":"sweet","step":1,"date":0},
+	{"index":"index10","word":"weiblich","translate":"female","step":1,"date":0},{"index":"index11","word":"bestellen","translate":"order","step":1,"date":0},
+	{"index":"index12","word":"kalt","translate":"cold","step":2,"date":0},
+	{"index":"index13","word":"sauer","translate":"sour","step":2,"date":0},
+	{"index":"index14","word":"fliegen","translate":"fly","step":3,"date":0}
+	]
+	);
+
+	}
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	/**************************************************
 	* Learn Words // navigation.js
 	* coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 	* http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
@@ -410,7 +445,152 @@ var bundle =
 
 
 /***/ },
-/* 4 */
+/* 5 */
+/***/ function(module, exports) {
+
+	/**************************************************
+	* Learn Words // local.js
+	* coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
+	* http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+	* Placed in public domain.
+	**************************************************/
+	if(typeof(local) == 'undefined' || local == null || !local){
+	console.log("define local");
+		local = {
+
+			en_GB: {
+				summary: 'Summary',
+				learn: 'Learn',
+				repeat: 'Repeat',
+				vocabulary: 'Vocabulary',
+				settings: 'Settings',
+				editWords: 'Edit words',
+				first: 'First',
+				second: 'Second',
+				third: 'Third',
+				saveBtn: 'Save',
+				cancelBtn: 'Cancel',
+				language: 'Language',
+				en_GB: 'english',
+				de_DE: 'deutsch',
+				ru_RU: 'русский',
+				errorEmpty: 'All fields are required.',
+				errorValid: 'Entered values are incorrect.',
+				errorNo: 'New settings was saved.',
+				errorNoW: 'New word was added.',
+				totalWords: 'Total words',
+				learnWordsNum: 'Words to learn',
+				repeatWords: 'Words to repeat',
+				rememberBtn: 'Remember',
+				repeatBtn: 'Repeat',
+				knownBtn: 'Know',
+				allWordsOk: 'No more words for learning.',
+				inputWordLbl: 'Word',
+				inputTranslateLbl: 'Translate',
+				enterBtn: 'Check',
+				allWordsDone: 'No more words for repeat.'
+			},
+
+			ru_RU: {
+				summary: 'Сводка',
+				learn: 'Учить',
+				repeat: 'Повторять',
+				vocabulary: 'Словарь',
+				settings: 'Настройки',
+				editWords: 'Редактировать слова',
+				first: 'Первый',
+				second: 'Второй',
+				third: 'Третий',
+				saveBtn: 'Сохранить',
+				cancelBtn: 'Отменить',
+				language: 'Язык',
+				en_GB: 'english',
+				de_DE: 'deutsch',
+				ru_RU: 'русский',
+				errorEmpty: 'Все поля обязательны.',
+				errorValid: 'Введенные значения невалидны.',
+				errorNo: 'Новые значение были записаны.',
+				errorNoW: 'Новое слово добавлено.',
+				totalWords: 'Всего слов',
+				learnWordsNum: 'Слов учить',
+				repeatWords: 'Сегодня поторить слов',
+				rememberBtn: 'Запомнил',
+				repeatBtn: 'Повторить',
+				knownBtn: 'Знаю',
+				allWordsOk: 'Нет больше слов для изучения.',
+				inputWordLbl: 'Слово',
+				inputTranslateLbl: 'Перевод',
+				enterBtn: 'Проверить',
+				allWordsDone: 'Нет больше слов для повторения.'
+			},
+
+			de_DE: {
+				summary: 'Summe',
+				learn: 'Lernen',
+				repeat: 'Wiederholen',
+				vocabulary: 'Vokabular',
+				settings: 'Rahmen',
+				editWords: 'Wörter ändern',
+				first: 'Erste',
+				second: 'Zweite',
+				third: 'Dritte',
+				saveBtn: 'Speichern',
+				cancelBtn: 'Stornieren',
+				language: 'Sprache',
+				en_GB: 'english',
+				de_DE: 'deutsch',
+				ru_RU: 'русский',
+				errorEmpty: 'Alle Felder sind erforderlich.',
+				errorValid: 'Eingegebene Werte sind falsch.',
+				errorNo: 'Neue Einstellungen gespeichert wurde.',
+				errorNoW: 'Neues Wort hinzugefügt.',
+				totalWords: 'Insgesamt Worte',
+				learnWordsNum: 'Wörter zu lernen',
+				repeatWords: 'Worte zu wiederholen',
+				rememberBtn: 'Merken',
+				repeatBtn: 'Wiederholen',
+				knownBtn: 'Wissen',
+				allWordsOk: 'Keine Worte mehr für das Lernen.',
+				inputWordLbl: 'Wort',
+				inputTranslateLbl: 'Übersetzen',
+				enterBtn: 'Prüfen',
+				allWordsDone: 'Keine Worte mehr für wiederholen.'
+			},
+			changeLocalContent: function(){ // change inner content
+				var langNode = $('[data-toggle=lang]'),
+					langSelect = $('[data-type=lang-select]');
+
+				$(langNode).each(function(i, node){
+					$(node).text(local[local.currentLocal][$(node).data('lang')]);
+				});
+				$(langSelect).each(function(i, node){
+					$(node).removeClass('selected');
+				});
+			},
+
+			langSelect: function(){ //change localization
+				local.currentLocal = $(this).data('lang');
+				$('#langSelect').click();
+				$('.navbar-toggle:visible').click();
+				local.changeLocalContent();
+				LW.storeItem(LW.name+'-language', local.currentLocal);
+				$(this).addClass('selected');
+				return false;
+			},
+
+			init: function(){
+	                        var settings = LW.getSettings(); // to force initialisation.
+				local.currentLocal = LW.readItem(LW.name+'-language');
+				$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
+			}
+		}
+
+		local.init();
+	}
+
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	/**********************************************
@@ -968,186 +1148,6 @@ var bundle =
 
 	        Vocabulary.init();
 	    }
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	/**************************************************
-	* Learn Words // memorystore.js
-	*
-	* Load initial set of German words with
-	* English translation.
-	*
-	**************************************************/
-
-	"use strict";
-
-	if (LW.isOK && LW.isEmpty) {
-	        console.log('memorystore: start loading words');
-
-	LW.loadWords(
-	[
-	{"index":"index1","word":"das Auto","translate":"car","step":0,"date":0},
-	{"index":"index2","word":"laufen","translate":"run","step":0,"date":0},
-	{"index":"index3","word":"alt","translate":"old","step":0,"date":0},
-	{"index":"index4","word":"krank","translate":"sick","step":0,"date":0},{"index":"index5","word":"heute","translate":"today","step":0,"date":0},{"index":"index6","word":"schreiben","translate":"write","step":0,"date":0},{"index":"index7","word":"hell","translate":"light","step":0,"date":0},
-	{"index":"index8","word":"reich","translate":"rich","step":0,"date":0},
-	{"index":"index9","word":"süß","translate":"sweet","step":1,"date":0},
-	{"index":"index10","word":"weiblich","translate":"female","step":1,"date":0},{"index":"index11","word":"bestellen","translate":"order","step":1,"date":0},
-	{"index":"index12","word":"kalt","translate":"cold","step":2,"date":0},
-	{"index":"index13","word":"sauer","translate":"sour","step":2,"date":0},
-	{"index":"index14","word":"fliegen","translate":"fly","step":3,"date":0}
-	]
-	);
-
-	}
-
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	/**************************************************
-	* Learn Words // local.js
-	* coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
-	* http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
-	* Placed in public domain.
-	**************************************************/
-	if(typeof(local) == 'undefined' || local == null || !local){
-	console.log("define local");
-		local = {
-
-			en_GB: {
-				summary: 'Summary',
-				learn: 'Learn',
-				repeat: 'Repeat',
-				vocabulary: 'Vocabulary',
-				settings: 'Settings',
-				editWords: 'Edit words',
-				first: 'First',
-				second: 'Second',
-				third: 'Third',
-				saveBtn: 'Save',
-				cancelBtn: 'Cancel',
-				language: 'Language',
-				en_GB: 'english',
-				de_DE: 'deutsch',
-				ru_RU: 'русский',
-				errorEmpty: 'All fields are required.',
-				errorValid: 'Entered values are incorrect.',
-				errorNo: 'New settings was saved.',
-				errorNoW: 'New word was added.',
-				totalWords: 'Total words',
-				learnWordsNum: 'Words to learn',
-				repeatWords: 'Words to repeat',
-				rememberBtn: 'Remember',
-				repeatBtn: 'Repeat',
-				knownBtn: 'Know',
-				allWordsOk: 'No more words for learning.',
-				inputWordLbl: 'Word',
-				inputTranslateLbl: 'Translate',
-				enterBtn: 'Check',
-				allWordsDone: 'No more words for repeat.'
-			},
-
-			ru_RU: {
-				summary: 'Сводка',
-				learn: 'Учить',
-				repeat: 'Повторять',
-				vocabulary: 'Словарь',
-				settings: 'Настройки',
-				editWords: 'Редактировать слова',
-				first: 'Первый',
-				second: 'Второй',
-				third: 'Третий',
-				saveBtn: 'Сохранить',
-				cancelBtn: 'Отменить',
-				language: 'Язык',
-				en_GB: 'english',
-				de_DE: 'deutsch',
-				ru_RU: 'русский',
-				errorEmpty: 'Все поля обязательны.',
-				errorValid: 'Введенные значения невалидны.',
-				errorNo: 'Новые значение были записаны.',
-				errorNoW: 'Новое слово добавлено.',
-				totalWords: 'Всего слов',
-				learnWordsNum: 'Слов учить',
-				repeatWords: 'Сегодня поторить слов',
-				rememberBtn: 'Запомнил',
-				repeatBtn: 'Повторить',
-				knownBtn: 'Знаю',
-				allWordsOk: 'Нет больше слов для изучения.',
-				inputWordLbl: 'Слово',
-				inputTranslateLbl: 'Перевод',
-				enterBtn: 'Проверить',
-				allWordsDone: 'Нет больше слов для повторения.'
-			},
-
-			de_DE: {
-				summary: 'Summe',
-				learn: 'Lernen',
-				repeat: 'Wiederholen',
-				vocabulary: 'Vokabular',
-				settings: 'Rahmen',
-				editWords: 'Wörter ändern',
-				first: 'Erste',
-				second: 'Zweite',
-				third: 'Dritte',
-				saveBtn: 'Speichern',
-				cancelBtn: 'Stornieren',
-				language: 'Sprache',
-				en_GB: 'english',
-				de_DE: 'deutsch',
-				ru_RU: 'русский',
-				errorEmpty: 'Alle Felder sind erforderlich.',
-				errorValid: 'Eingegebene Werte sind falsch.',
-				errorNo: 'Neue Einstellungen gespeichert wurde.',
-				errorNoW: 'Neues Wort hinzugefügt.',
-				totalWords: 'Insgesamt Worte',
-				learnWordsNum: 'Wörter zu lernen',
-				repeatWords: 'Worte zu wiederholen',
-				rememberBtn: 'Merken',
-				repeatBtn: 'Wiederholen',
-				knownBtn: 'Wissen',
-				allWordsOk: 'Keine Worte mehr für das Lernen.',
-				inputWordLbl: 'Wort',
-				inputTranslateLbl: 'Übersetzen',
-				enterBtn: 'Prüfen',
-				allWordsDone: 'Keine Worte mehr für wiederholen.'
-			},
-			changeLocalContent: function(){ // change inner content
-				var langNode = $('[data-toggle=lang]'),
-					langSelect = $('[data-type=lang-select]');
-
-				$(langNode).each(function(i, node){
-					$(node).text(local[local.currentLocal][$(node).data('lang')]);
-				});
-				$(langSelect).each(function(i, node){
-					$(node).removeClass('selected');
-				});
-			},
-
-			langSelect: function(){ //change localization
-				local.currentLocal = $(this).data('lang');
-				$('#langSelect').click();
-				$('.navbar-toggle:visible').click();
-				local.changeLocalContent();
-				LW.storeItem(LW.name+'-language', local.currentLocal);
-				$(this).addClass('selected');
-				return false;
-			},
-
-			init: function(){
-	                        var settings = LW.getSettings(); // to force initialisation.
-				local.currentLocal = LW.readItem(LW.name+'-language');
-				$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
-			}
-		}
-
-		local.init();
-	}
 
 
 /***/ }

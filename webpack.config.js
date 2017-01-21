@@ -8,5 +8,9 @@ module.exports = {
     library: 'bundle'
   },
 
-  watch: true
+  watch: true,
+
+  watchOptions: {
+    aggregateTimeout: 100
+  }
 };
