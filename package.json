@@ -23,7 +23,6 @@
     "url": "git+https://github.com/e1r0nd/learnwords.git"
   },
   "dependencies": {
-    "babel-eslint": "^7.1.1",
     "coveralls": "^2.11.15",
     "http-server": "^0.9.0",
     "istanbul": "^0.4.5",
