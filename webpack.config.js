@@ -1,5 +1,9 @@
 'use strict';
 
+const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log(NODE_ENV);
+const webpack = require('webpack');
+
 module.exports = {
   entry: './app/js/main',
   output: {
@@ -8,11 +12,17 @@ module.exports = {
     library: 'bundle'
   },
 
-  watch: true,
+  watch: 'development' === NODE_ENV,
 
   watchOptions: {
     aggregateTimeout: 100
   },
 
-  devtool: 'source-map'
+  devtool: 'development' === NODE_ENV ? 'source-map' : null,
+
+  plugins: [
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(NODE_ENV)
+    })
+  ]
 };

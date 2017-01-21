@@ -11,6 +11,9 @@ require('./utils/navigation');
 require('./local/local');
 require('./actions/actions');
 
+if ('development' === NODE_ENV) {
+  console.log('development environment');
+}
 // read settings
 Settings.getSettings();
 

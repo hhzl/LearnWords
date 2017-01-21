@@ -58,6 +58,9 @@ var bundle =
 	__webpack_require__(5);
 	__webpack_require__(6);
 	
+	if (true) {
+	  console.log('development environment');
+	}
 	// read settings
 	Settings.getSettings();
 	
