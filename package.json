@@ -15,7 +15,7 @@
     "prestart": "npm install",
     "start": "http-server app/ -a 0.0.0.0 -p 8000 -o",
     "test": "mocha",
-    "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
+    "coverage": "istanbul cover --include-all-sources node_modules/mocha/bin/_mocha -- -R spec",
     "coveralls": "cat coverage/lcov.info | coveralls"
   },
   "repository": {
