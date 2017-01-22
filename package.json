@@ -15,7 +15,7 @@
     "prestart": "npm install",
     "start": "http-server app/ -a 0.0.0.0 -p 8000 -o",
     "dev": "set NODE_ENV=development&webpack",
-    "build": "set NODE_ENV=production&webpack",
+    "prod": "set NODE_ENV=production&webpack",
     "test": "mocha",
     "coverage": "istanbul cover --include-all-sources node_modules/mocha/bin/_mocha -- -R spec",
     "coveralls": "cat coverage/lcov.info | coveralls"
