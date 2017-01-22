@@ -1,18 +1,28 @@
 /**************************************************
 * Learn Words // main.js
-* coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
+* coded by Anatol Marezhanyi aka e1r0nd//[CRG] - January 2017
 * http://linkedin.com/in/merezhany/ a.merezhanyi@gmail.com
 * Placed in public domain.
 **************************************************/
-require('./utils/LWdb');
-require('./utils/utils');
-require('./utils/memorystore');
-require('./utils/navigation');
-require('./local/local');
-require('./actions/actions');
+'use strict';
 
+import LW from './utils/LW';
+console.log(LW);
+let LW = new LW('LWdb');
+console.log(LW);
+console.log(LW.isLocalStorageAvailable());
+// let _LWdb = require('./utils/LWdb').LWdb;
+//let LW = new _LWdb('LWdb');
+
+import Utils from './utils/utils';
+// import Memorystore from './utils/memorystore';
+// import Navigation from './utils/navigation';
+// import Local from './local/local';
+// import Actions from './actions/actions';
+
+let a;
 if ('development' === NODE_ENV) {
-  console.log('development environment');
+  console.log(`development environment ${NODE_ENV}`);
 }
 // read settings
 Settings.getSettings();

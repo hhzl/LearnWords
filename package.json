@@ -15,6 +15,7 @@
     "prestart": "npm install",
     "start": "http-server app/ -a 0.0.0.0 -p 8000 -o",
     "dev": "set NODE_ENV=development&webpack",
+    "build": "set NODE_ENV=production&webpack",
     "test": "mocha",
     "coverage": "istanbul cover --include-all-sources node_modules/mocha/bin/_mocha -- -R spec",
     "coveralls": "cat coverage/lcov.info | coveralls"
@@ -24,12 +25,18 @@
     "url": "git+https://github.com/e1r0nd/learnwords.git"
   },
   "dependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
     "coveralls": "^2.11.15",
     "http-server": "^0.9.0",
+    "i": "^0.3.5",
     "istanbul": "^0.4.5",
     "jquery": "^3.1.1",
     "materialize-css": "^0.97.8",
     "mocha": "^3.2.0",
+    "npm": "^4.1.1",
     "webpack": "^1.14.0"
   },
   "devDependencies": {}
