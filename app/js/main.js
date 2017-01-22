@@ -8,9 +8,9 @@
 
 import LW from './utils/LW';
 // console.log(LW);
-let LW = new LW('LWdb');
+let LWdb = new LW('LWdb');
 // console.log(LW);
-// console.log(LW.isLocalStorageAvailable());
+console.log(LWdb.isLocalStorageAvailable());
 
 import Utils from './utils/utils';
 // import Memorystore from './utils/memorystore';

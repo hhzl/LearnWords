@@ -63,12 +63,10 @@ var bundle =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	console.log(_LW2.default);
+	// console.log(LW);
 	var LWdb = new _LW2.default('LWdb');
-	console.log(LWdb);
+	// console.log(LW);
 	console.log(LWdb.isLocalStorageAvailable());
-	// let _LWdb = require('./utils/LWdb').LWdb;
-	//let LW = new _LWdb('LWdb');
 	
 	// import Memorystore from './utils/memorystore';
 	// import Navigation from './utils/navigation';
@@ -184,7 +182,7 @@ var bundle =
 /* 7 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -196,8 +194,8 @@ var bundle =
 	
 	/**************************************************
 	 * Learn Words // localstorage.js
-	 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
-	 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+	 * coded by Anatol Marezhanyi aka e1r0nd//[CRG] - March 2014
+	 * http://linkedin.com/in/merezhany/ a.merezhany@gmail.com
 	 *
 	 * Updated by Hannes Hirzel, November 2016
 	 *
@@ -213,11 +211,22 @@ var bundle =
 	    _classCallCheck(this, LW);
 	
 	    this.isOK = false;
+	    if (!this.isLocalStorageAvailable()) {
+	      alert('Local Storage is not available.');
+	      return false;
+	    };
 	    this.name = dbName;
+	    // get index
+	    this.index = [];
+	    var strIndex = localStorage.getItem(this.name + '-words');
+	    if (strIndex) {
+	      this.index = strIndex.split(',');
+	    };
+	    this.isOK = true;
 	  }
 	
 	  _createClass(LW, [{
-	    key: "isLocalStorageAvailable",
+	    key: 'isLocalStorageAvailable',
 	    value: function isLocalStorageAvailable() {
 	      try {
 	        return window && window.localStorage;
@@ -225,183 +234,166 @@ var bundle =
 	        return false;
 	      }
 	    }
-	    //
-	    // readItem: function (key) {
-	    //   if (LW.isOK) {
-	    //     return JSON.parse(localStorage.getItem(key));
-	    //   }
-	    // },
-	    //
-	    // removeItem: function (key) {
-	    //   if (LW.isOK) {
-	    //     localStorage.removeItem(key);
-	    //   }
-	    // },
-	    //
-	    // storeItem: function (key, value) {
-	    //   if (LW.isOK) {
-	    //     try {
-	    //       localStorage.setItem(key, JSON.stringify(value));
-	    //     } catch (e) {
-	    //       if (e === QUOTA_EXCEEDED_ERR) {
-	    //         alert('Local Storage is full');
-	    //       }
-	    //       return false;
-	    //     }
-	    //   }
-	    // },
-	    //
-	    // putSettings: function (theSettingsObj) {
-	    //   LW.storeItem(LW.name + '-words-settings', theSettingsObj);
-	    // },
-	    //
-	    // getSettings: function () {
-	    //
-	    //   var settings = LW.readItem(LW.name + '-words-settings');
-	    //   if (!settings) {
-	    //     // the app runs for the first time, thus
-	    //     // initialize the setting object neeeds to be initialized
-	    //     // with default values.
-	    //
-	    //     // first is for box (or step) 1 in the Leitner box;
-	    //     //       ask the word again after 1 day
-	    //     // second is for box 2 ; ask the word again after 3 days
-	    //     // third is for box 3 ; ask the word again after 7 days
-	    //
-	    //     // Note: box 0 is for the Learn mode and it not set
-	    //     // as the words are accessible all the time
-	    //     console.log('initialize settings');
-	    //     settings = {
-	    //       first: 1,
-	    //       second: 3,
-	    //       third: 7
-	    //     };
-	    //     LW.storeItem(LW.name + '-settings', settings);
-	    //     LW.storeItem(LW.name + '-language', 'en_GB');
-	    //
-	    //   };
-	    //
-	    //   return settings
-	    // },
-	    //
-	    // loadWords: function (theWords) {
-	    //   var i = 0;
-	    //   var arrayOfKeys = [];
-	    //
-	    //   theWords.forEach(function (element) {
-	    //     i = i + 1;
-	    //     element.index = 'index' + i;
-	    //     element.step = 0;
-	    //     element.date = 0;
-	    //     LW.storeItem(LW.name + '-' + element.index, element);
-	    //     arrayOfKeys.push(element.index);
-	    //   });
-	    //
-	    //   LW.storeItem(LW.name + '-words', arrayOfKeys.join());
-	    //   LW.index = arrayOfKeys;
-	    //
-	    //   console.log(arrayOfKeys.length + ' words loaded');
-	    //
-	    // },
-	    //
-	    // isEmpty: function (key) {
-	    //   if (LW.isOK) {
-	    //     if (LW.index.length === 0) {
-	    //       return true
-	    //     } else {
-	    //       return false
-	    //     };
-	    //   }
-	    // },
-	    //
-	    // dumpWords: function (aKeyPrefix) {
-	    //   if (LW.isOK) {
-	    //     'use strict';
-	    //     var key;
-	    //     var strValue;
-	    //     var result = [];
-	    //
-	    //     var prefixForNumber = LW.name + '-index';
-	    //
-	    //     // go through all keys starting with the name
-	    //     // of the database, i.e 'learnWords-index14'
-	    //     // collect the matching objects into arr
-	    //     for (var i = 0; i < localStorage.length; i++) {
-	    //       key = localStorage.key(i);
-	    //       strValue = localStorage.getItem(key);
-	    //
-	    //       if (key.lastIndexOf(prefixForNumber, 0) === 0) {
-	    //         result.push(JSON.parse(strValue));
-	    //       };
-	    //     };
-	    //
-	    //     // Dump the array as JSON code (for select all / copy)
-	    //     console.log(JSON.stringify(result));
-	    //   }
-	    // },
-	    //
-	    // removeObjects: function (aKeyPrefix) {
-	    //   if (LW.isOK) {
-	    //     var key;
-	    //     var st;
-	    //     var keysToDelete = [];
-	    //
-	    //     // go through all keys starting with the name
-	    //     // of the database, i.e 'learnWords-index14'
-	    //     for (var i = 0; i < localStorage.length; i++) {
-	    //       key = localStorage.key(i);
-	    //       st = localStorage.getItem(key);
-	    //
-	    //       if (key.lastIndexOf(aKeyPrefix, 0) === 0) {
-	    //         keysToDelete.push(key);
-	    //       };
-	    //     };
-	    //     // now we have all the keys which should be deleted
-	    //     // in the array keysToDelete.
-	    //     console.log(keysToDelete);
-	    //     keysToDelete.forEach(function (aKey) {
-	    //       localStorage.removeItem(aKey);
-	    //     });
-	    //   }
-	    // },
-	    //
-	    // removeWords: function () {
-	    //
-	    //   var aKeyPrefix = LW.name + '-index';
-	    //   LW.removeObjects(aKeyPrefix);
-	    //
-	    //   // reset index
-	    //   localStorage.setItem(LW.name + '-words', '');
-	    //
-	    //   // this one triggers that memorystore is executed
-	    //   localStorage.removeItem(LW.name + '-settings');
-	    //
-	    // },
-	    //
-	    // destroy: function () {
-	    //
-	    //   var aKeyPrefix = LW.name;
-	    //
-	    //   LW.removeObjects(aKeyPrefix);
-	    //
-	    // },
-	    //
-	    // init: function (dbName) {
-	    // this.isOK = false;
-	    // if (!LW.isLocalStorageAvailable()) {
-	    //   alert('Local Storage is not available.');
-	    //   return false;
-	    // };
-	    // this.name = dbName;
-	    // get index
-	    // LW.index = [];
-	    // var strIndex = localStorage.getItem(LW.name + '-words');
-	    // if (strIndex) {
-	    //   LW.index = strIndex.split(',')
-	    // };
-	    // LW.isOK = true;
-	    // }
+	  }, {
+	    key: 'readItem',
+	    value: function readItem(key) {
+	      if (this.isOK) {
+	        return JSON.parse(localStorage.getItem(key));
+	      }
+	    }
+	  }, {
+	    key: 'removeItem',
+	    value: function removeItem(key) {
+	      if (this.isOK) {
+	        localStorage.removeItem(key);
+	      }
+	    }
+	  }, {
+	    key: 'storeItem',
+	    value: function storeItem(key, value) {
+	      if (this.isOK) {
+	        try {
+	          localStorage.setItem(key, JSON.stringify(value));
+	        } catch (e) {
+	          if (e === QUOTA_EXCEEDED_ERR) {
+	            alert('Local Storage is full');
+	          }
+	          return false;
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'putSettings',
+	    value: function putSettings(theSettingsObj) {
+	      this.storeItem(this.name + '-words-settings', theSettingsObj);
+	    }
+	  }, {
+	    key: 'getSettings',
+	    value: function getSettings() {
 	
+	      var settings = this.readItem(this.name + '-words-settings');
+	      if (!settings) {
+	        // the app runs for the first time, thus
+	        // initialize the setting object neeeds to be initialized
+	        // with default values.
+	
+	        // first is for box (or step) 1 in the Leitner box;
+	        //       ask the word again after 1 day
+	        // second is for box 2 ; ask the word again after 3 days
+	        // third is for box 3 ; ask the word again after 7 days
+	
+	        // Note: box 0 is for the Learn mode and it not set
+	        // as the words are accessible all the time
+	        console.log('initialize settings');
+	        settings = {
+	          first: 1,
+	          second: 3,
+	          third: 7
+	        };
+	        this.storeItem(this.name + '-settings', settings);
+	        this.storeItem(this.name + '-language', 'en_GB');
+	      };
+	
+	      return settings;
+	    }
+	  }, {
+	    key: 'loadWords',
+	    value: function loadWords(theWords) {
+	      var i = 0;
+	      var arrayOfKeys = [];
+	
+	      theWords.forEach(function (element) {
+	        i = i + 1;
+	        element.index = 'index' + i;
+	        element.step = 0;
+	        element.date = 0;
+	        this.storeItem(this.name + '-' + element.index, element);
+	        arrayOfKeys.push(element.index);
+	      });
+	
+	      this.storeItem(this.name + '-words', arrayOfKeys.join());
+	      this.index = arrayOfKeys;
+	
+	      console.log(arrayOfKeys.length + ' words loaded');
+	    }
+	  }, {
+	    key: 'isEmpty',
+	    value: function isEmpty() /*key*/{
+	      if (this.isOK) {
+	        return !this.index.length ? true : false;
+	      }
+	    }
+	  }, {
+	    key: 'dumpWords',
+	    value: function dumpWords() /*aKeyPrefix*/{
+	      if (this.isOK) {
+	        'use strict';
+	        var key;
+	        var strValue;
+	        var result = [];
+	
+	        var prefixForNumber = this.name + '-index';
+	
+	        // go through all keys starting with the name
+	        // of the database, i.e 'learnWords-index14'
+	        // collect the matching objects into arr
+	        for (var i = 0; i < localStorage.length; i++) {
+	          key = localStorage.key(i);
+	          strValue = localStorage.getItem(key);
+	
+	          if (0 === key.lastIndexOf(prefixForNumber, 0)) {
+	            result.push(JSON.parse(strValue));
+	          };
+	        };
+	
+	        // Dump the array as JSON code (for select all / copy)
+	        console.log(JSON.stringify(result));
+	      }
+	    }
+	  }, {
+	    key: 'removeObjects',
+	    value: function removeObjects(aKeyPrefix) {
+	      if (this.isOK) {
+	        var key;
+	        // var st;
+	        var keysToDelete = [];
+	
+	        // go through all keys starting with the name
+	        // of the database, i.e 'learnWords-index14'
+	        for (var i = 0; i < localStorage.length; i++) {
+	          key = localStorage.key(i);
+	          st = localStorage.getItem(key);
+	
+	          if (0 === key.lastIndexOf(aKeyPrefix, 0)) {
+	            keysToDelete.push(key);
+	          };
+	        };
+	        // now we have all the keys which should be deleted
+	        // in the array keysToDelete.
+	        console.log(keysToDelete);
+	        keysToDelete.forEach(function (aKey) {
+	          localStorage.removeItem(aKey);
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'removeWords',
+	    value: function removeWords() {
+	      var aKeyPrefix = this.name + '-index';
+	
+	      this.removeObjects(aKeyPrefix);
+	      // reset index
+	      localStorage.setItem(this.name + '-words', '');
+	      // this one triggers that memorystore is executed
+	      localStorage.removeItem(this.name + '-settings');
+	    }
+	  }, {
+	    key: 'destroy',
+	    value: function destroy() {
+	      var aKeyPrefix = this.name;
+	
+	      this.removeObjects(aKeyPrefix);
+	    }
 	  }]);
 	
 	  return LW;
@@ -409,9 +401,6 @@ var bundle =
 	
 	exports.default = LW;
 	;
-	
-	// initialize database sub-object
-	// LW.init('LWdb');
 
 /***/ }
 /******/ ]);
