@@ -21,6 +21,7 @@ module.exports = {
   devtool: 'development' === NODE_ENV ? 'source-map' : null,
 
   plugins: [
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(NODE_ENV)
     })
