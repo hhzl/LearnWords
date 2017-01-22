@@ -72,7 +72,6 @@ var bundle =
 	// import Navigation from './utils/navigation';
 	// import Local from './local/local';
 	// import Actions from './actions/actions';
-	
 	var a = void 0;
 	if (true) {
 	  console.log('development environment ' + ("development"));
