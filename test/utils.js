@@ -1,7 +1,7 @@
 'use strict';
 
 let assert = require('assert');
-require('../app/js/utils/utils');
+let Utils = require('../app/js/utils/utils').Utils;
 
 describe('Utils', () => {
   it('check for number', () => {
