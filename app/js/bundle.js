@@ -57,7 +57,11 @@ var bundle =
 	
 	var _LW2 = _interopRequireDefault(_LW);
 	
-	var _utils = __webpack_require__(2);
+	var _settings = __webpack_require__(2);
+	
+	var _settings2 = _interopRequireDefault(_settings);
+	
+	var _utils = __webpack_require__(3);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -68,16 +72,20 @@ var bundle =
 	// console.log(LW);
 	console.log(LWdb.isLocalStorageAvailable());
 	
+	// let settings = new Settings();
+	console.log(_settings2.default);
+	
+	console.log(_utils2.default);
 	// import Memorystore from './utils/memorystore';
 	// import Navigation from './utils/navigation';
 	// import Local from './local/local';
 	// import Actions from './actions/actions';
-	var a = void 0;
+	
 	if (true) {
 	  console.log('development environment ' + ("development"));
 	}
 	// read settings
-	Settings.getSettings();
+	_settings2.default.getSettings();
 	
 	// set user saved local
 	if (local.currentLocal !== $('[data-type=lang-select].selected').data('lang')) {
@@ -317,6 +325,114 @@ var bundle =
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**********************************************
+	 * Learn Words // settings.js
+	 * coded by Anatol Marezhanyi aka e1r0nd//[CRG] - March 2014
+	 * http://linkedin.com/in/merezhany/ a.merezhanyi@gmail.com
+	 *
+	 * Updated by Hannes Hirzel, November 2016
+	 *
+	 * Placed in public domain.
+	 **************************************************/
+	
+	if (typeof Settings == 'undefined' || Settings == null || !Settings) {
+	  var Settings = {};
+	  Settings = {
+	
+	    inputFirstCheck: $('#inputFirstCheck'),
+	    inputSecondCheck: $('#inputSecondCheck'),
+	    inputThirdCheck: $('#inputThirdCheck'),
+	    settingFrom: $('#settingFrom'),
+	    errorSettings: $('#errorSettings'),
+	
+	    params: {},
+	
+	    getSettings: function getSettings() {
+	      //read setting's values
+	      var settings = LW.getSettings();
+	
+	      $(Settings.inputFirstCheck).val(settings.first);
+	      $(Settings.inputSecondCheck).val(settings.second);
+	      $(Settings.inputThirdCheck).val(settings.third);
+	
+	      Settings.params = settings; //store local
+	    },
+	
+	    saveSetting: function saveSetting() {
+	      //save setting's values to DB
+	      var first = $(Settings.inputFirstCheck).val().trim(),
+	          second = $(Settings.inputSecondCheck).val().trim(),
+	          third = $(Settings.inputThirdCheck).val().trim(),
+	          form = $(Settings.settingFrom),
+	          errorName = '',
+	          error = false;
+	
+	      Utils.clearFields();
+	      //check for empty fields
+	      if (!first) {
+	        error = Utils.setFieldError(form.children(':nth-child(1)'));
+	        errorName = 'empty';
+	      } else if (!second) {
+	        error = Utils.setFieldError(form.children(':nth-child(2)'));
+	        errorName = 'empty';
+	      } else if (!third) {
+	        error = Utils.setFieldError(form.children(':nth-child(3)'));
+	        errorName = 'empty';
+	      } else {
+	        //only digits is valid
+	        if (!Utils.isNumber(first)) {
+	          error = Utils.setFieldError(form.children(':nth-child(1)'));
+	          errorName = 'number';
+	        };
+	        if (!Utils.isNumber(second)) {
+	          error = Utils.setFieldError(form.children(':nth-child(2)'));
+	          errorName = 'number';
+	        };
+	        if (!Utils.isNumber(third)) {
+	          error = Utils.setFieldError(form.children(':nth-child(3)'));
+	          errorName = 'number';
+	        };
+	      }
+	      if (error) {
+	        //show error if any
+	        var errorTxt = errorName == 'empty' ? local[local.currentLocal].errorEmpty : local[local.currentLocal].errorValid;
+	        $(Settings.errorSettings).removeClass('nodisplay').text(errorTxt);
+	      } else {
+	        //otherwise save new settings
+	        settings = {
+	          first: first,
+	          second: second,
+	          third: third
+	        };
+	        LW.putSettings(settings);
+	        $(Settings.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
+	
+	        Settings.params = settings; //store local
+	      };
+	    },
+	
+	    cancelSetting: function cancelSetting() {
+	      Utils.clearFields();
+	      Settings.getSettings();
+	    },
+	
+	    init: function init() {
+	      $(document).on('click touchstart', '#saveSettings', Settings.saveSetting);
+	      $(document).on('click touchstart', '#cancelSettings', Settings.cancelSetting);
+	    }
+	  };
+	}
+	
+	if (typeof module !== 'undefined' && module.exports != null) {
+	  exports.Settings = Settings;
+	}
+
+/***/ },
+/* 3 */
 /***/ function(module, exports) {
 
 	/**************************************************

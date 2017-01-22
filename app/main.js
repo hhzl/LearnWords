@@ -6,18 +6,23 @@
 **************************************************/
 'use strict';
 
-import LW from './utils/LW';
+import LW from './js/utils/LW';
 // console.log(LW);
 let LWdb = new LW('LWdb');
 // console.log(LW);
 console.log(LWdb.isLocalStorageAvailable());
 
-import Utils from './utils/utils';
+import Settings from './components/settings/settings';
+// let settings = new Settings();
+console.log(Settings);
+
+import Utils from './js/utils/utils';
+console.log(Utils);
 // import Memorystore from './utils/memorystore';
 // import Navigation from './utils/navigation';
 // import Local from './local/local';
 // import Actions from './actions/actions';
-let a;
+
 if ('development' === NODE_ENV) {
   console.log(`development environment ${NODE_ENV}`);
 }

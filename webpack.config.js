@@ -5,7 +5,7 @@ console.log(NODE_ENV);
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './app/js/main',
+  entry: './app/main',
   output: {
     path: __dirname + '/app/js/',
     filename: 'bundle.js',
