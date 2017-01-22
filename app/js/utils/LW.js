@@ -13,7 +13,7 @@
 
 // Define database sub-object
 export default class LW {
-  constructor (dbName) {
+  constructor(dbName) {
     this.isOK = false;
     if (!this.isLocalStorageAvailable()) {
       alert('Local Storage is not available.');
@@ -115,13 +115,13 @@ export default class LW {
 
   }
 
-  isEmpty(key) {
+  isEmpty(/*key*/) {
     if (this.isOK) {
       return (!this.index.length) ? true : false;
     }
   }
 
-  dumpWords(aKeyPrefix) {
+  dumpWords(/*aKeyPrefix*/) {
     if (this.isOK) {
       'use strict';
       var key;
@@ -137,7 +137,7 @@ export default class LW {
         key = localStorage.key(i);
         strValue = localStorage.getItem(key);
 
-        if (key.lastIndexOf(prefixForNumber, 0) === 0) {
+        if (0 === key.lastIndexOf(prefixForNumber, 0)) {
           result.push(JSON.parse(strValue));
         };
       };
@@ -150,7 +150,7 @@ export default class LW {
   removeObjects(aKeyPrefix) {
     if (this.isOK) {
       var key;
-      var st;
+      // var st;
       var keysToDelete = [];
 
       // go through all keys starting with the name
@@ -159,7 +159,7 @@ export default class LW {
         key = localStorage.key(i);
         st = localStorage.getItem(key);
 
-        if (key.lastIndexOf(aKeyPrefix, 0) === 0) {
+        if (0 === key.lastIndexOf(aKeyPrefix, 0)) {
           keysToDelete.push(key);
         };
       };
@@ -173,16 +173,13 @@ export default class LW {
   }
 
   removeWords() {
-
     var aKeyPrefix = this.name + '-index';
-    this.removeObjects(aKeyPrefix);
 
+    this.removeObjects(aKeyPrefix);
     // reset index
     localStorage.setItem(this.name + '-words', '');
-
     // this one triggers that memorystore is executed
     localStorage.removeItem(this.name + '-settings');
-
   }
 
   destroy() {

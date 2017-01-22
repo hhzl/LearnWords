@@ -7,12 +7,10 @@
 'use strict';
 
 import LW from './utils/LW';
-console.log(LW);
+// console.log(LW);
 let LW = new LW('LWdb');
-console.log(LW);
-console.log(LW.isLocalStorageAvailable());
-// let _LWdb = require('./utils/LWdb').LWdb;
-//let LW = new _LWdb('LWdb');
+// console.log(LW);
+// console.log(LW.isLocalStorageAvailable());
 
 import Utils from './utils/utils';
 // import Memorystore from './utils/memorystore';
