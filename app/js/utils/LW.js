@@ -7,12 +7,7 @@
  *
  * Placed in public domain.
  **************************************************/
-
-// Define global LearnWords object
-// var LW = {};
-
-// Define database sub-object
-export default class LW {
+export default class LWClass {
   constructor(dbName) {
     this.isOK = false;
     if (!this.isLocalStorageAvailable()) {
