@@ -24,7 +24,6 @@ export default class SettingsClass {
     $(document).on('click touchstart', '#cancelSettings', this.cancelSetting);
   }
   getSettings() { //read setting's values
-    console.log(bundle);
     var storedSettings = LW.getSettings();
 
     $(this.inputFirstCheck).val(storedSettings.first);
