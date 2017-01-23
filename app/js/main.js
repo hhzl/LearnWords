@@ -13,7 +13,7 @@ console.log(LW.isLocalStorageAvailable());
 import SettingsClass from '../components/settings/settings';
 const Settings = new SettingsClass();
 
-import Utils from './utils/utils';
+import {Utils} from './utils/utils';
 
 import {Memorystore} from './utils/memorystore';
 // load the default words set if needed
@@ -29,7 +29,20 @@ Navigation.init();
 import {local} from './local/local';
 local.init();
 
-// import Actions from './actions/actions';
+import {Vocabulary} from './actions/vocabulary';
+Vocabulary.init();
+Vocabulary.viewWord();
+
+import {Learn} from './actions/learn';
+Learn.init();
+Learn.recountIndexLearn();
+Learn.showWord();
+
+import {Repeat} from './actions/repeat';
+Repeat.init();
+Repeat.recountIndexRepeat();
+Repeat.showWord();
+
 if ('development' === NODE_ENV) {
   console.log(`development environment ${NODE_ENV}`);
 }
@@ -37,13 +50,7 @@ if ('development' === NODE_ENV) {
 Settings.getSettings();
 
 // set user saved local
-//if (local.currentLocal !== $('[data-type=lang-//select].selected').data('lang')) {
-//	$('[data-lang=' + local.currentLocal + ']').click();
-//};
-
-// Vocabulary.viewWord();
-// Learn.recountIndexLearn();
-// Learn.showWord();
-// Repeat.recountIndexRepeat();
-// Repeat.showWord();
-// Utils.closeMobMenu();
+if (local.currentLocal !== $('[data-type=lang-select].selected').data('lang')) {
+	$('[data-lang=' + local.currentLocal + ']').click();
+};
+Utils.closeMobMenu();

@@ -6,7 +6,6 @@
  **************************************************/
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
-console.log(LW.isLocalStorageAvailable());
 
 console.log('define local');
 const local = {
