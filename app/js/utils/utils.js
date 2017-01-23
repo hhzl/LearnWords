@@ -64,3 +64,5 @@ if (typeof (Utils) == 'undefined' || Utils == null || !Utils) {
 if (typeof module !== 'undefined' && module.exports != null) {
     exports.Utils = Utils;
 }
+
+export {Utils};

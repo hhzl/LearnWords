@@ -26,6 +26,10 @@ if (LW.isOK && LW.isEmpty) {
 }
 
 // import Navigation from './utils/navigation';
+import {Navigation} from './utils/navigation';
+// const {Navigation} = new NavigationObject();
+Navigation.init();
+
 // import Local from './local/local';
 // import Actions from './actions/actions';
 if ('development' === NODE_ENV) {
