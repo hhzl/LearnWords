@@ -13,7 +13,7 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "start": "http-server app/ -a 0.0.0.0 -p 8000 -o",
+    "start": "http-server app/ -a 0.0.0.0 -p 8080 -o",
     "build:dev": "set NODE_ENV=development&webpack",
     "build:prod": "set NODE_ENV=production&webpack",
     "test": "mocha --compilers js:babel-core/register",

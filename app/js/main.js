@@ -12,7 +12,7 @@ const LW = new LWClass('LWdb');
 // console.log(LW);
 console.log(LW.isLocalStorageAvailable());
 
-import SettingsClass from './components/settings/settings';
+import SettingsClass from '../components/settings/settings';
 const Settings = new SettingsClass();
 
 import Utils from './utils/utils';
@@ -32,9 +32,9 @@ Settings.getSettings();
 //	$('[data-lang=' + local.currentLocal + ']').click();
 //};
 
-Vocabulary.viewWord();
-Learn.recountIndexLearn();
-Learn.showWord();
-Repeat.recountIndexRepeat();
-Repeat.showWord();
-Utils.closeMobMenu();
+// Vocabulary.viewWord();
+// Learn.recountIndexLearn();
+// Learn.showWord();
+// Repeat.recountIndexRepeat();
+// Repeat.showWord();
+// Utils.closeMobMenu();
