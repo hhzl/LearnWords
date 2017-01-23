@@ -28,7 +28,6 @@ if (LW.isOK && LW.isEmpty) {
 // import Navigation from './utils/navigation';
 // import Local from './local/local';
 // import Actions from './actions/actions';
-let a;
 if ('development' === NODE_ENV) {
   console.log(`development environment ${NODE_ENV}`);
 }
