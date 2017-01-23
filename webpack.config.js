@@ -5,11 +5,11 @@ console.log(NODE_ENV);
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './app/main',
+  entry: './app/js/main',
   output: {
-    path: __dirname + '/app/js/',
-    filename: 'bundle.js',
-    library: 'bundle'
+    path: __dirname + '/app/',
+    filename: '[name].js',
+    library: '[name]'
   },
 
   watch: 'development' === NODE_ENV,
@@ -18,12 +18,16 @@ module.exports = {
     aggregateTimeout: 100
   },
 
-  devtool: 'development' === NODE_ENV ? 'source-map' : null,
+  devtool: 'development' === NODE_ENV ? 'inline-source-map' : null,
 
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoErrorsPlugin,
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(NODE_ENV)
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      minChunk: 3
     })
   ],
 
