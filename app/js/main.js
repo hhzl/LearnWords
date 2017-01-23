@@ -16,7 +16,15 @@ import SettingsClass from '../components/settings/settings';
 const Settings = new SettingsClass();
 
 import Utils from './utils/utils';
-// import Memorystore from './utils/memorystore';
+
+import {Memorystore} from './utils/memorystore';
+// load the default words set if needed
+if (LW.isOK && LW.isEmpty) {
+  console.log('memorystore: start loading words');
+  LW.loadWords(Memorystore);
+  console.log('memorystore: words have been loaded');
+}
+
 // import Navigation from './utils/navigation';
 // import Local from './local/local';
 // import Actions from './actions/actions';
