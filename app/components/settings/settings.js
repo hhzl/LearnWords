@@ -1,5 +1,5 @@
 /**********************************************
- * Learn Words // settings.js
+ * Learn Words // this.js
  * coded by Anatol Marezhanyi aka e1r0nd//[CRG] - March 2014
  * http://linkedin.com/in/merezhany/ a.merezhanyi@gmail.com
  *
@@ -7,34 +7,38 @@
  *
  * Placed in public domain.
  **************************************************/
+import LWClass from '../../js/utils/LW';
+const LW = new LWClass('LWdb');
 
-if (typeof (Settings) == 'undefined' || Settings == null || !Settings) {
-  var Settings = {};
-  Settings = {
+export default class SettingsClass {
+  constructor() {
+    this.inputFirstCheck = $('#inputFirstCheck');
+    this.inputSecondCheck = $('#inputSecondCheck');
+    this.inputThirdCheck = $('#inputThirdCheck');
+    this.settingFrom = $('#settingFrom');
+    this.errorSettings = $('#errorSettings');
 
-    inputFirstCheck: $('#inputFirstCheck'),
-    inputSecondCheck: $('#inputSecondCheck'),
-    inputThirdCheck: $('#inputThirdCheck'),
-    settingFrom: $('#settingFrom'),
-    errorSettings: $('#errorSettings'),
+    this.params = {};
 
-    params: {},
+    $(document).on('click touchstart', '#saveSettings', this.saveSetting);
+    $(document).on('click touchstart', '#cancelSettings', this.cancelSetting);
+  }
+  getSettings() { //read setting's values
+    console.log(bundle);
+    var storedSettings = LW.getSettings();
 
-    getSettings: function () { //read setting's values
-      var settings = LW.getSettings();
+    $(this.inputFirstCheck).val(storedSettings.first);
+    $(this.inputSecondCheck).val(storedSettings.second);
+    $(this.inputThirdCheck).val(storedSettings.third);
 
-      $(Settings.inputFirstCheck).val(settings.first);
-      $(Settings.inputSecondCheck).val(settings.second);
-      $(Settings.inputThirdCheck).val(settings.third);
+    this.params = storedSettings; //store local
+  }
 
-      Settings.params = settings; //store local
-    },
-
-    saveSetting: function () { //save setting's values to DB
-      var first = $(Settings.inputFirstCheck).val().trim(),
-        second = $(Settings.inputSecondCheck).val().trim(),
-        third = $(Settings.inputThirdCheck).val().trim(),
-        form = $(Settings.settingFrom),
+  saveSetting() { //save setting's values to DB
+      var first = $(this.inputFirstCheck).val().trim(),
+        second = $(this.inputSecondCheck).val().trim(),
+        third = $(this.inputThirdCheck).val().trim(),
+        form = $(this.settingFrom),
         errorName = '',
         error = false;
 
@@ -64,8 +68,8 @@ if (typeof (Settings) == 'undefined' || Settings == null || !Settings) {
         };
       }
       if (error) { //show error if any
-        var errorTxt = (errorName == 'empty') ? local[local.currentLocal].errorEmpty : local[local.currentLocal].errorValid;
-        $(Settings.errorSettings).removeClass('nodisplay').text(errorTxt);
+        var errorTxt = ('empty' === errorName) ? local[local.currentLocal].errorEmpty : local[local.currentLocal].errorValid;
+        $(this.errorSettings).removeClass('nodisplay').text(errorTxt);
       } else { //otherwise save new settings
         settings = {
           first: first,
@@ -73,24 +77,14 @@ if (typeof (Settings) == 'undefined' || Settings == null || !Settings) {
           third: third
         };
         LW.putSettings(settings);
-        $(Settings.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
+        $(this.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
 
-        Settings.params = settings; //store local
+        this.params = settings; //store local
       };
-    },
-
-    cancelSetting: function () {
-      Utils.clearFields();
-      Settings.getSettings();
-    },
-
-    init: function () {
-      $(document).on('click touchstart', '#saveSettings', Settings.saveSetting);
-      $(document).on('click touchstart', '#cancelSettings', Settings.cancelSetting);
     }
-  };
-}
 
-if (typeof module !== 'undefined' && module.exports != null) {
-  exports.Settings = Settings;
-}
+    cancelSetting() {
+      Utils.clearFields();
+      this.getSettings();
+    }
+};
