@@ -7,9 +7,7 @@
 'use strict';
 
 import LWClass from './utils/LW';
-// console.log(LW);
 const LW = new LWClass('LWdb');
-// console.log(LW);
 console.log(LW.isLocalStorageAvailable());
 
 import SettingsClass from '../components/settings/settings';
@@ -25,12 +23,12 @@ if (LW.isOK && LW.isEmpty) {
   console.log('memorystore: words have been loaded');
 }
 
-// import Navigation from './utils/navigation';
 import {Navigation} from './utils/navigation';
-// const {Navigation} = new NavigationObject();
 Navigation.init();
 
-// import Local from './local/local';
+import {local} from './local/local';
+local.init();
+
 // import Actions from './actions/actions';
 if ('development' === NODE_ENV) {
   console.log(`development environment ${NODE_ENV}`);
