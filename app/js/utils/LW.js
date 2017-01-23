@@ -93,21 +93,19 @@ export default class LWClass {
   loadWords(theWords) {
     var i = 0;
     var arrayOfKeys = [];
-
-    theWords.forEach(function (element) {
-      i = i + 1;
-      element.index = 'index' + i;
-      element.step = 0;
-      element.date = 0;
+    const storeEachElement = function (element) {
+      element.index = 'index' + ++i;
+      element.step = element.date = 0;
       this.storeItem(this.name + '-' + element.index, element);
       arrayOfKeys.push(element.index);
-    });
+    };
+
+    theWords.forEach(storeEachElement.bind(this));
 
     this.storeItem(this.name + '-words', arrayOfKeys.join());
     this.index = arrayOfKeys;
 
-    console.log(arrayOfKeys.length + ' words loaded');
-
+    console.log(arrayOfKeys.length + ' words have been loaded');
   }
 
   isEmpty(/*key*/) {
