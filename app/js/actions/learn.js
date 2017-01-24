@@ -7,8 +7,6 @@
  *
  * Placed in public domain.
  **************************************************/
-'use strict';
-
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
 import {Utils} from './../utils/utils';
@@ -27,10 +25,10 @@ const Learn = {
   noWordsLeft: $('#noWordsLeft'),
   allWordsOk: $('#allWordsOk'),
 
-  recountIndexLearn: function () { //count words to learn
+  recountIndexLearn() { //count words to learn
     if (!Learn.wordsLearn.length) {
-      $(LW.index).each(function (index, node) { //the initial counting
-        var item = LW.readItem(LW.name + '-' + node);
+      $(LW.index).each((index, node) => { //the initial counting
+        const item = LW.readItem(`${LW.name}-${node}`);
         if (item) {
           if (0 === item.step) {
             Learn.wordsLearn.push(item);
@@ -39,14 +37,14 @@ const Learn = {
       });
     }
     console.log('Learn recountIndexLearn', Learn.wordsLearn);
-    var wordsLearnLength = (Learn.wordsLearn.length) ? Learn.wordsLearn.length : '';
+    const wordsLearnLength = (Learn.wordsLearn.length) ? Learn.wordsLearn.length : '';
 
     $(learnWordsNum).text(wordsLearnLength || '0');
     $(learnWordsTopNum).text(wordsLearnLength);
     $(learnWordsTopSNum).text(wordsLearnLength);
   },
 
-  showWord: function () { //show a next word to learn
+  showWord() { //show a next word to learn
     if (Learn.wordsLearn.length) {
       $(learnWord).text(Learn.wordsLearn[Learn.currentIndex].word);
       $(translateWord).text(Learn.wordsLearn[Learn.currentIndex].translate);
@@ -59,17 +57,17 @@ const Learn = {
     }
   },
 
-  actionWord: function (step, reindex) {
+  actionWord(step, reindex) {
     if (step) {
-      var word = {
+      const word = {
         index: Learn.wordsLearn[Learn.currentIndex].index,
         word: Learn.wordsLearn[Learn.currentIndex].word,
         translate: Learn.wordsLearn[Learn.currentIndex].translate,
-        step: step,
+        step,
         date: (1 === step) ? (Utils.getToday() + Utils.delay * Settings.params.first) : 0
       };
 
-      LW.storeItem(LW.name + '-' + Learn.wordsLearn[Learn.currentIndex].index, word); //save word
+      LW.storeItem(`${LW.name}-${Learn.wordsLearn[Learn.currentIndex].index}`, word); //save word
 
       if (reindex) {
         Learn.wordsLearn.splice(Learn.currentIndex, 1); //remove from index
@@ -87,19 +85,19 @@ const Learn = {
     Learn.showWord();
   },
 
-  rememberWord: function () {
+  rememberWord() {
     Learn.actionWord(1, true);
   },
 
-  repeatWord: function () {
+  repeatWord() {
     Learn.actionWord(0);
   },
 
-  knownWord: function () {
+  knownWord() {
     Learn.actionWord(4, true);
   },
 
-  init: function () {
+  init() {
     $(document).on('click touchstart', '#rememberBtn', Learn.rememberWord);
     $(document).on('click touchstart', '#repeatBtn', Learn.repeatWord);
     $(document).on('click touchstart', '#knownBtn', Learn.knownWord);
