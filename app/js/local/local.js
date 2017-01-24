@@ -108,31 +108,33 @@ const local = {
     allWordsDone: 'Keine Worte mehr für wiederholen.'
   },
 
-  changeLocalContent: function () { // change inner content
-    var langNode = $('[data-toggle=lang]'),
-      langSelect = $('[data-type=lang-select]');
+  changeLocalContent() {
+    // change inner content
+    const langNode = $('[data-toggle=lang]');
 
-    $(langNode).each(function (i, node) {
+    const langSelect = $('[data-type=lang-select]');
+
+    $(langNode).each((i, node) => {
       $(node).text(local[local.currentLocal][$(node).data('lang')]);
     });
-    $(langSelect).each(function (i, node) {
+    $(langSelect).each((i, node) => {
       $(node).removeClass('selected');
     });
   },
 
-  langSelect: function () { //change localization
+  langSelect() { //change localization
     local.currentLocal = $(this).data('lang');
     $('#langSelect').click();
     $('.navbar-toggle:visible').click();
     local.changeLocalContent();
-    LW.storeItem(LW.name + '-language', local.currentLocal);
+    LW.storeItem(`${LW.name}-language`, local.currentLocal);
     $(this).addClass('selected');
     return false;
   },
 
-  init: function () {
+  init() {
     // var settings = LW.getSettings(); // to force initialisation.
-    this.currentLocal = LW.readItem(LW.name + '-language');
+    this.currentLocal = LW.readItem(`${LW.name}-language`);
     $(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
   }
 };
