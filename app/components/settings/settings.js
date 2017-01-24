@@ -1,5 +1,5 @@
 /**********************************************
- * Learn Words // this.js
+ * Learn Words // settings.js
  * coded by Anatol Marezhanyi aka e1r0nd//[CRG] - March 2014
  * http://linkedin.com/in/merezhany/ a.merezhanyi@gmail.com
  *
