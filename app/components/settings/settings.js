@@ -24,7 +24,7 @@ export default class SettingsClass {
     $(document).on('click touchstart', '#cancelSettings', this.cancelSetting);
   }
   getSettings() { //read setting's values
-    var storedSettings = LW.getSettings();
+    const storedSettings = LW.getSettings();
 
     $(this.inputFirstCheck).val(storedSettings.first);
     $(this.inputSecondCheck).val(storedSettings.second);
@@ -33,54 +33,56 @@ export default class SettingsClass {
     this.params = storedSettings; //store local
   }
 
-  saveSetting() { //save setting's values to DB
-      var first = $(this.inputFirstCheck).val().trim(),
-        second = $(this.inputSecondCheck).val().trim(),
-        third = $(this.inputThirdCheck).val().trim(),
-        form = $(this.settingFrom),
-        errorName = '',
-        error = false;
+  saveSetting() {
+    //save setting's values to DB
+    const first = $(this.inputFirstCheck).val().trim();
 
-      Utils.clearFields();
-      //check for empty fields
-      if (!first) {
+    const second = $(this.inputSecondCheck).val().trim();
+    const third = $(this.inputThirdCheck).val().trim();
+    const form = $(this.settingFrom);
+    let errorName = '';
+    let error = false;
+
+    Utils.clearFields();
+    //check for empty fields
+    if (!first) {
+      error = Utils.setFieldError(form.children(':nth-child(1)'));
+      errorName = 'empty';
+    } else if (!second) {
+      error = Utils.setFieldError(form.children(':nth-child(2)'));
+      errorName = 'empty';
+    } else if (!third) {
+      error = Utils.setFieldError(form.children(':nth-child(3)'));
+      errorName = 'empty';
+    } else { //only digits is valid
+      if (!Utils.isNumber(first)) {
         error = Utils.setFieldError(form.children(':nth-child(1)'));
-        errorName = 'empty';
-      } else if (!second) {
+        errorName = 'number';
+      };
+      if (!Utils.isNumber(second)) {
         error = Utils.setFieldError(form.children(':nth-child(2)'));
-        errorName = 'empty';
-      } else if (!third) {
+        errorName = 'number';
+      };
+      if (!Utils.isNumber(third)) {
         error = Utils.setFieldError(form.children(':nth-child(3)'));
-        errorName = 'empty';
-      } else { //only digits is valid
-        if (!Utils.isNumber(first)) {
-          error = Utils.setFieldError(form.children(':nth-child(1)'));
-          errorName = 'number';
-        };
-        if (!Utils.isNumber(second)) {
-          error = Utils.setFieldError(form.children(':nth-child(2)'));
-          errorName = 'number';
-        };
-        if (!Utils.isNumber(third)) {
-          error = Utils.setFieldError(form.children(':nth-child(3)'));
-          errorName = 'number';
-        };
-      }
-      if (error) { //show error if any
-        var errorTxt = ('empty' === errorName) ? local[local.currentLocal].errorEmpty : local[local.currentLocal].errorValid;
-        $(this.errorSettings).removeClass('nodisplay').text(errorTxt);
-      } else { //otherwise save new settings
-        settings = {
-          first: first,
-          second: second,
-          third: third
-        };
-        LW.putSettings(settings);
-        $(this.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
-
-        this.params = settings; //store local
+        errorName = 'number';
       };
     }
+    if (error) { //show error if any
+      const errorTxt = ('empty' === errorName) ? local[local.currentLocal].errorEmpty : local[local.currentLocal].errorValid;
+      $(this.errorSettings).removeClass('nodisplay').text(errorTxt);
+    } else { //otherwise save new settings
+      settings = {
+        first,
+        second,
+        third
+      };
+      LW.putSettings(settings);
+      $(this.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
+
+      this.params = settings; //store local
+    }
+  }
 
     cancelSetting() {
       Utils.clearFields();
