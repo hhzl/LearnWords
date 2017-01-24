@@ -51,6 +51,7 @@ Settings.getSettings();
 
 // set user saved local
 if (local.currentLocal !== $('[data-type=lang-select].selected').data('lang')) {
-	$('[data-lang=' + local.currentLocal + ']').click();
+	$(`[data-lang=${local.currentLocal}]`).click();
 };
+
 Utils.closeMobMenu();
