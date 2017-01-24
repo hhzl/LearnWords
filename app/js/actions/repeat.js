@@ -4,7 +4,6 @@
  * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
  * Placed in public domain.
  **************************************************/
-'use strict';
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
 import {Utils} from './../utils/utils';
@@ -30,11 +29,11 @@ const Repeat = {
   noWordsRepeat: $('#noWordsRepeat'),
   enterBtn: $('#enterBtn'),
 
-  recountIndexRepeat: function () {
+  recountIndexRepeat() {
     //count words to Repeat
     if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
-      $(LW.index).each(function (index, node) { //the initial counting
-        var item = LW.readItem(LW.name + '-' + node);
+      $(LW.index).each((index, node) => { //the initial counting
+        const item = LW.readItem(`${LW.name}-${node}`);
         if (item) {
           if (Utils.getToday() > item.date) { //if this word is for today
             if (1 === item.step) {
@@ -49,15 +48,15 @@ const Repeat = {
         }
       });
     }
-    var wordsRepeatTotal = Repeat.wordsRepeat.first.length + Repeat.wordsRepeat.second.length + Repeat.wordsRepeat.third.length,
-      wordsRepeatLength = (wordsRepeatTotal) ? wordsRepeatTotal : '';
+    const wordsRepeatTotal = Repeat.wordsRepeat.first.length + Repeat.wordsRepeat.second.length + Repeat.wordsRepeat.third.length;
+    const wordsRepeatLength = (wordsRepeatTotal) ? wordsRepeatTotal : '';
 
     $(repeatWordsNum).text(wordsRepeatLength || '0');
     $(repeatWordsTopNum).text(wordsRepeatLength);
     $(repeatWordsTopSNum).text(wordsRepeatLength);
   },
 
-  getWord: function (index, arrWords) {
+  getWord(index, arrWords) {
     //if index is 0 we get the correct word. The other words are random
     if (0 === index) {
       wordPlaceholder = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0][(Repeat.wordsRepeat.first.length) ? 'translate' : 'word'];
@@ -65,21 +64,21 @@ const Repeat = {
       wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][Utils.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length - 1)];
     }
 
-    if (arrWords.indexOf(wordPlaceholder) >= 0) {
+    if (arrWords.includes(wordPlaceholder)) {
       Repeat.getWord(index, arrWords);
     }
 
     return wordPlaceholder;
   },
 
-  showWord: function () { //show a next word to Repeat
+  showWord() { //show a next word to Repeat
     if (Repeat.wordsRepeat.first.length || Repeat.wordsRepeat.second.length) {
-      var id = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].index,
-        wordPlaceholder = '';
-      var arrWords = new Array();
+      const id = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].index;
+      let wordPlaceholder = '';
+      const arrWords = new Array();
       $(checkWordInp).text(Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0][(Repeat.wordsRepeat.first.length) ? 'word' : 'translate']).data('id', id);
 
-      var arrOptionButtons = $('[data-type=checkWordBtn]');
+      const arrOptionButtons = $('[data-type=checkWordBtn]');
       //the answer buttons are shuffled so that we don't know which one is the correct word.
       Utils.shuffle(arrOptionButtons);
 
@@ -107,10 +106,10 @@ const Repeat = {
     }
   },
 
-  actionWord: function (step, reindex) {
+  actionWord(step, reindex) {
     if (step) {
 
-      LW.storeItem(LW.name + '-' + Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
+      LW.storeItem(`${LW.name}-${Repeat.wordsRepeat[Repeat.currentIndex].word}`, word); //save word
 
       if (reindex) {
         Repeat.wordsRepeat.splice(Repeat.currentIndex, 1); //remove from index
@@ -128,8 +127,8 @@ const Repeat = {
     Repeat.showWord(Repeat.currentIndex);
   },
 
-  checkWord: function (self) {
-    var word = {
+  checkWord(self) {
+    const word = {
       index: Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].index,
       word: Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].word,
       translate: Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].translate,
@@ -143,7 +142,7 @@ const Repeat = {
       word.step--;
       word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + Utils.delay * Settings.params.first;
     }
-    LW.storeItem(LW.name + '-' + word.index, word); //save word
+    LW.storeItem(`${LW.name}-${word.index}`, word); //save word
     Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
     Learn.wordsLearn = [];
     Learn.recountIndexLearn();
@@ -152,8 +151,8 @@ const Repeat = {
     Repeat.showWord();
   },
 
-  repeatWord: function () {
-    var word = {
+  repeatWord() {
+    const word = {
       index: Repeat.wordsRepeat.third[0].index,
       word: Repeat.wordsRepeat.third[0].word,
       translate: Repeat.wordsRepeat.third[0].translate,
@@ -166,7 +165,7 @@ const Repeat = {
       word.step--;
       word.date = Utils.getToday() + Utils.delay * Settings.params.second;
     };
-    LW.storeItem(LW.name + '-' + word.index, word); //save word
+    LW.storeItem(`${LW.name}-${word.index}`, word); //save word
     Repeat.wordsRepeat.third.splice(0, 1); //remove from index
     Learn.wordsLearn = [];
     Learn.recountIndexLearn();
@@ -175,7 +174,7 @@ const Repeat = {
     Repeat.showWord();
   },
 
-  init: function () {
+  init() {
     $(document).on('click touchstart', '[data-type=checkWordBtn]', function () {
       Repeat.checkWord(this);
     });
