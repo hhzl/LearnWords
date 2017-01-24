@@ -4,7 +4,6 @@
  * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
  * Placed in public domain.
  **************************************************/
-'use strict';
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
 import {Utils} from './../utils/utils';
@@ -35,21 +34,23 @@ const Vocabulary = {
   words: [],
   translates: [],
 
-  recountTotal: function () {
+  recountTotal() {
     $(Vocabulary.totalWordsNum).text(LW.index.length);
   },
 
-  removeWord: function (self, notReindex) { //remove word from vocabulary
-    var id = $(self).data('id'),
-      node = $(self).data('node');
+  removeWord(self, notReindex) {
+    //remove word from vocabulary
+    const id = $(self).data('id');
+
+    const node = $(self).data('node');
 
     if (!notReindex) {
       LW.index.splice(id, 1); //remove from index
-      LW.storeItem(LW.name + '-words', LW.index.join());
+      LW.storeItem(`${LW.name}-words`, LW.index.join());
     }
-    LW.removeItem(LW.name + '-' + node); //remove this word
-    $('#' + node).remove();
-    $('#' + node + 'Edit').remove();
+    LW.removeItem(`${LW.name}-${node}`); //remove this word
+    $(`#${node}`).remove();
+    $(`#${node}Edit`).remove();
     Vocabulary.recountTotal();
     Learn.wordsLearn = [];
     Learn.recountIndexLearn();
@@ -64,13 +65,13 @@ const Vocabulary = {
     Repeat.recountIndexRepeat();
   },
 
-  viewWord: function () {
-    var contentInner = '';
+  viewWord() {
+    let contentInner = '';
 
-    $(LW.index).each(function (index, node) {
-      "use strict";
-      var txt, translate;
-      var item = LW.readItem(LW.name + '-' + node);
+    $(LW.index).each((index, node) => {
+      let txt;
+      let translate;
+      const item = LW.readItem(`${LW.name}-${node}`);
       if (item) {
         txt = item.word;
         translate = item.translate;
@@ -85,14 +86,12 @@ const Vocabulary = {
     Vocabulary.recountTotal();
   },
 
-  addSaveWord: function (wordTxt, translate, addForm, addWord) {
-    "use strict";
-
-    var inputWord = wordTxt.val().trim(),
-      inputTranslate = translate.val().trim(),
-      form = addForm,
-      error = false,
-      word = {};
+  addSaveWord(wordTxt, translate, addForm, addWord) {
+    const inputWord = wordTxt.val().trim();
+    const inputTranslate = translate.val().trim();
+    const form = addForm;
+    let error = false;
+    let word = {};
 
     Utils.clearFields();
     //check for empty fields
@@ -105,8 +104,8 @@ const Vocabulary = {
       $(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
       $(Vocabulary.errorVocabulary).text(local[local.currentLocal].errorEmpty);
     } else { //otherwise save new word to Vocabulary
-      var newIndexVal;
-      var todayDate = Utils.getToday(true);
+      let newIndexVal;
+      const todayDate = Utils.getToday(true);
       word = {
         index: todayDate,
         word: inputWord,
@@ -116,10 +115,10 @@ const Vocabulary = {
       };
 
       // save newly added word
-      newIndexVal = 'index' + (LW.index.length + 1);
-      LW.storeItem(LW.name + '-' + newIndexVal, word);
+      newIndexVal = `index${LW.index.length + 1}`;
+      LW.storeItem(`${LW.name}-${newIndexVal}`, word);
 
-      var contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g, todayDate).replace(/{{txt}}/g, inputWord).replace(/{{translate}}/g, inputTranslate).replace(/{{index}}/g, (addWord) ? LW.index.length : LW.index.indexOf(inputWord));
+      const contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g, todayDate).replace(/{{txt}}/g, inputWord).replace(/{{translate}}/g, inputTranslate).replace(/{{index}}/g, (addWord) ? LW.index.length : LW.index.indexOf(inputWord));
 
       if (addWord) {
         LW.index.push(newIndexVal);
@@ -129,32 +128,32 @@ const Vocabulary = {
         $(Vocabulary.errorVocabulary).text(local[local.currentLocal].errorNoW);
         $(Vocabulary.vocabularyBox).append(contentInner);
       } else {
-        var id = wordTxt.attr('id').slice(5);
+        const id = wordTxt.attr('id').slice(5);
 
         LW.index[LW.index.indexOf(id)] = newIndexVal;
-        $('#' + id).before(contentInner);
-        Vocabulary.removeWord($('#del-' + id), true);
+        $(`#${id}`).before(contentInner);
+        Vocabulary.removeWord($(`#del-${id}`), true);
       }
 
-      LW.storeItem(LW.name + '-words', LW.index.join()); //add word to Vocabulary list
+      LW.storeItem(`${LW.name}-words`, LW.index.join()); //add word to Vocabulary list
       Utils.clearFields();
       Vocabulary.recountTotal();
       Learn.wordsLearn = [];
       Learn.recountIndexLearn();
       Learn.showWord();
-    };
+    }
   },
 
-  init: function () {
-    $(document).on('click touchstart', '#addBtn', function () {
+  init() {
+    $(document).on('click touchstart', '#addBtn', () => {
       Vocabulary.addSaveWord($(Vocabulary.inputWordTxt), $(Vocabulary.inputTranslate), $(Vocabulary.addWordForm), true);
     });
     $(document).on('click touchstart', '.js-edit-btn', function () {
-      $('#' + $(this).data('node')).hide();
-      $('#' + $(this).data('node') + 'Edit').show();
+      $(`#${$(this).data('node')}`).hide();
+      $(`#${$(this).data('node')}Edit`).show();
     });
     $(document).on('click touchstart', '.js-save-btn', function () {
-      Vocabulary.addSaveWord($('#word-' + $(this).data('node')), $('#translate-' + $(this).data('node')), $('#form-' + $(this).data('node')));
+      Vocabulary.addSaveWord($(`#word-${$(this).data('node')}`), $(`#translate-${$(this).data('node')}`), $(`#form-${$(this).data('node')}`));
     });
     $(document).on('click touchstart', '.js-del-btn', function () {
       Vocabulary.removeWord(this);
