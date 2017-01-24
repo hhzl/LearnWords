@@ -4,8 +4,6 @@
  * http://linkedin.com/in/merezhany/ a.merezhanyi@gmail.com
  * Placed in public domain.
  **************************************************/
-'use strict';
-
 export const Memorystore = [
   {
     'index': 'index1',
