@@ -8,7 +8,7 @@ import {Utils} from './utils';
 let Navigation = {};
 
 Navigation = {
-  hashguard: function (init) { //onHashChange
+  hashguard(init) { //onHashChange
     if (init) {
       this.hash = window.location.hash;
     }
@@ -21,17 +21,17 @@ Navigation = {
     setTimeout(this.hashguard.bind(this), 50);
   },
 
-  hashbreak: function () { //hashchange event
-    var hashUrl = window.location.hash.slice(3);
+  hashbreak() { //hashchange event
+    const hashUrl = window.location.hash.slice(3);
 
     if (hashUrl) {
-      $('[data-target=' + window.location.hash.slice(3) + ']').click();
+      $(`[data-target=${window.location.hash.slice(3)}]`).click();
     } else {
       $('[data-target=summary]').click();
     }
   },
 
-  navSelect: function () {
+  navSelect() {
     $('[data-toggle=nav]').each(function () {
       $(this).addClass('nodisplay');
     });
@@ -39,11 +39,11 @@ Navigation = {
       $(this).removeClass('active');
     });
     $(this).parent().addClass('active');
-    $('#' + $(this).data('target')).removeClass('nodisplay');
+    $(`#${$(this).data('target')}`).removeClass('nodisplay');
     Utils.closeMobMenu();
   },
 
-  init: function () {
+  init() {
     $(document).on('click touchstart', '[data-type=nav-select]', this.navSelect);
     $(window).bind('hashbreak', this.hashbreak);
     this.hashguard(false);
