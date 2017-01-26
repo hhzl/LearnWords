@@ -44,7 +44,7 @@ module.exports = {
 
   resolve: {
     modulesDirectories: ['node_modules'],
-    extentions: ['', 'js']
+    extentions: ['', 'js', 'css']
   },
 
   resolveLoader: {
@@ -62,6 +62,10 @@ module.exports = {
     {
       test: /\.html$/,
       loader: 'html'
+    },
+    {
+      test: /\.css$/,
+      loader: 'style!css' //!autoprefixer?browser=last 2 versions'
     }],
 
     noParse: /\/node_modules\/(bootstrap|jquery)/
