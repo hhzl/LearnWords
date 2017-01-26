@@ -7,8 +7,10 @@
 'use strict';
 
 // import 'jquery';
+import '../css/bootstrap.min.css'; // remove after materialize-css will be implemented
 import 'bootstrap'; // remove after materialize-css will be implemented
 // import 'materialize-css';
+import '../css/style.css';
 
 import LWClass from './utils/LW';
 const LW = new LWClass('LWdb');
