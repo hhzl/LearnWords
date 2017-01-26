@@ -3,11 +3,15 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(NODE_ENV);
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = {
+  // context: path.join(__dirname, 'app'),
+
   entry: './app/js/main',
   output: {
-    path: __dirname + '/app/',
+    path: __dirname + '/dist/',
     filename: '[name].js',
     library: '[name]'
   },
@@ -33,7 +37,12 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       Materialize: 'materialize-css'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'public'
+      }
+    ])
   ],
 
   resolve: {
@@ -50,7 +59,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /\/node_modules\/$/,
+      exclude: /\/node_modules\//,
       loader: 'babel?presets[]=es2015'
     },
     {
@@ -58,7 +67,7 @@ module.exports = {
       loader: 'html'
     }],
 
-    noParse: /jquery.js$/
+    noParse: /\/node_modules\/(bootstrap|jquery)/
   }
 };
 
