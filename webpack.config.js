@@ -28,6 +28,15 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
       minChunk: 3
+    }),
+    // new webpack.ProvidePlugin({
+    //   $: 'jquery',
+    //   jQuery: 'jquery'
+    // })
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      Materialize: 'materialize-css'
     })
   ],
 
@@ -45,6 +54,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
+      exclude: /\/node_modules\//,
       loader: 'babel?presets[]=es2015'
     },
     {
