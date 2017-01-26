@@ -6,9 +6,9 @@
 **************************************************/
 'use strict';
 
-import 'jquery';
+// import 'jquery';
 import 'bootstrap'; // remove after materialize-css will be implemented
-import 'materialize-css';
+// import 'materialize-css';
 
 import LWClass from './utils/LW';
 const LW = new LWClass('LWdb');
