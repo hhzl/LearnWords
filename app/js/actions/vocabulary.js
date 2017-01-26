@@ -14,17 +14,6 @@ import rowTemplate from '../../components/row-word/row-word.html';
 
 const Vocabulary = {
   rowTemplate: rowTemplate,
-  /*'<div id="{{node}}" class="row"><div class="col-md-5 col-sm-5 col-xs-4">{{txt}}</div>' +
-    '<div class="col-md-5 col-sm-5 col-xs-4">{{translate}}</div>' +
-    '<div class="col-md-2 col-sm-2 col-xs-4"><button data-node="{{node}}" type="button" class="btn btn-info js-edit-btn"><span class="glyphicon glyphicon-edit"></span></button></div>' +
-    '</div>' +
-    '<div id="{{node}}Edit" class="row nodisplay"><form id="form-{{node}}" role="form">' +
-    '<div class="col-md-5 col-sm-5 col-xs-4"><input type="text" class="form-control inp-fld" id="word-{{node}}" placeholder="Enter word" value="{{txt}}"></div>' +
-    '<div class="col-md-5 col-sm-5 col-xs-4"><input type="text" class="form-control inp-fld" id="translate-{{node}}" placeholder="Enter translate" value="{{translate}}"></div>' +
-    '<div class="col-md-2 col-sm-2 col-xs-4"><button data-node="{{node}}" type="button" class="btn btn-success js-save-btn"><span class="glyphicon glyphicon-ok"></span></button>' +
-    '<button id="del-{{node}}" data-node="{{node}}" data-id="{{index}}" type="button" class="btn btn-danger js-del-btn"><span class="glyphicon glyphicon-remove"></span></button>' +
-    '</div></form>' +
-    '</div>',*/
 
   totalWordsNum: $('#totalWordsNum'),
   vocabularyBox: $('#vocabularyBox'),
