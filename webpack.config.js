@@ -6,9 +6,11 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './app/js/main',
+  context: __dirname + '/app',
+  entry: __dirname + '/app/js/main',
   output: {
-    path: __dirname + '/dist/',
+    path: __dirname + '/dist',
+    publicPath: '/',
     filename: '[name].js',
     library: '[name]'
   },
@@ -37,7 +39,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: 'public'
+        from: __dirname + '/public'
       }
     ])
   ],
