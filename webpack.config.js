@@ -46,6 +46,10 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loader: 'babel?presets[]=es2015'
+    },
+    {
+      test: /\.html$/,
+      loader: 'html-loader'
     }]
   }
 };
