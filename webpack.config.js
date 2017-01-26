@@ -29,10 +29,6 @@ module.exports = {
       name: 'common',
       minChunk: 3
     }),
-    // new webpack.ProvidePlugin({
-    //   $: 'jquery',
-    //   jQuery: 'jquery'
-    // })
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -54,13 +50,15 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /\/node_modules\//,
+      exclude: /\/node_modules\/$/,
       loader: 'babel?presets[]=es2015'
     },
     {
       test: /\.html$/,
       loader: 'html'
-    }]
+    }],
+
+    noParse: /jquery.js$/
   }
 };
 
