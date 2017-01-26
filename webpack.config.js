@@ -4,11 +4,8 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(NODE_ENV);
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
 
 module.exports = {
-  // context: path.join(__dirname, 'app'),
-
   entry: './app/js/main',
   output: {
     path: __dirname + '/dist/',
