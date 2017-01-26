@@ -10,8 +10,11 @@ import {Utils} from './../utils/utils';
 import {Learn} from './learn';
 import {Repeat} from './repeat';
 
+import rowTemplate from '../../components/row-word/row-word.html';
+
 const Vocabulary = {
-  rowTemplate: '<div id="{{node}}" class="row"><div class="col-md-5 col-sm-5 col-xs-4">{{txt}}</div>' +
+  rowTemplate: rowTemplate,
+  /*'<div id="{{node}}" class="row"><div class="col-md-5 col-sm-5 col-xs-4">{{txt}}</div>' +
     '<div class="col-md-5 col-sm-5 col-xs-4">{{translate}}</div>' +
     '<div class="col-md-2 col-sm-2 col-xs-4"><button data-node="{{node}}" type="button" class="btn btn-info js-edit-btn"><span class="glyphicon glyphicon-edit"></span></button></div>' +
     '</div>' +
@@ -21,7 +24,7 @@ const Vocabulary = {
     '<div class="col-md-2 col-sm-2 col-xs-4"><button data-node="{{node}}" type="button" class="btn btn-success js-save-btn"><span class="glyphicon glyphicon-ok"></span></button>' +
     '<button id="del-{{node}}" data-node="{{node}}" data-id="{{index}}" type="button" class="btn btn-danger js-del-btn"><span class="glyphicon glyphicon-remove"></span></button>' +
     '</div></form>' +
-    '</div>',
+    '</div>',*/
 
   totalWordsNum: $('#totalWordsNum'),
   vocabularyBox: $('#vocabularyBox'),
