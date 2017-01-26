@@ -44,7 +44,7 @@ module.exports = {
 
   resolve: {
     modulesDirectories: ['node_modules'],
-    extentions: ['', 'js', 'css']
+    extentions: ['', 'js']
   },
 
   resolveLoader: {
@@ -66,6 +66,10 @@ module.exports = {
     {
       test: /\.css$/,
       loader: 'style!css' //!autoprefixer?browser=last 2 versions'
+    },
+    {
+      test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+      loader: 'file?name=[path][name].[ext]'
     }],
 
     noParse: /\/node_modules\/(bootstrap|jquery)/
