@@ -67,7 +67,7 @@ module.exports = {
     },
     {
       test: /\.css$/,
-      loader: 'style!css' //!autoprefixer?browser=last 2 versions'
+      loader: 'style!css!scss' //!autoprefixer?browser=last 2 versions'
     },
     {
       test: /\.(ico|png|jpg|svg|ttf|eot|woff|woff2)$/,
