@@ -13,14 +13,11 @@ function addHash(template, hash) {
 }
 
 module.exports = {
-  context: __dirname + '/app',
-  // context: __dirname + '/app/js',
   entry: __dirname + '/app/js/main',
-  // entry: './main',
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: addHash('[name].js', 'chunkhash'),
+    filename: addHash('[name].js', 'developemnt' === NODE_ENV ? 'hash' : 'chunkhash'),
     library: '[name]'
   },
 
@@ -28,7 +25,7 @@ module.exports = {
     aggregateTimeout: 100
   },
 
-  devtool: 'development' === NODE_ENV ? 'inline-source-map' : null,
+  devtool: 'production' !== NODE_ENV ? 'inline-source-map' : null,
 
   plugins: [
     new webpack.NoErrorsPlugin,
@@ -44,18 +41,16 @@ module.exports = {
       jQuery: 'jquery',
       Materialize: 'materialize-css'
     }),
-    new CopyWebpackPlugin([
-      {
-        from: __dirname + '/public'
+    new CopyWebpackPlugin([{
+      from: __dirname + '/public'
+    }]),
+    new ExtractTextPlugin(
+      addHash('[name].css', 'contenthash'), {
+        allChunks: true,
+        disable: 'production' !== NODE_ENV
       }
-    ]),
-    new ExtractTextPlugin(addHash('[name].css', 'contenthash'), {allChunks: true}),
-    {
-      apply: (compiler) => {
-        rimraf.sync(compiler.options.output.path);
-      }
-    // }
-    },
+    ),
+    // ,
     new HtmlWebpackPlugin({
       filename: './main.html',
       chunks: ['common', 'main']
@@ -75,23 +70,24 @@ module.exports = {
 
   module: {
     loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel?presets[]=es2015'
-    },
-    {
-      test: /\.html$/,
-      loader: 'html'
-    },
-    {
-      test: /\.?css$/,
-      loader: ExtractTextPlugin.extract('css!sass') //!autoprefixer?browser=last 2 versions'
-    },
-    {
-      test: /\.(ico|png|jpg|svg|ttf|eot|woff|woff2)$/,
-      loader: addHash('file?name=[path][name].[ext]', 'hash:6')
-      // loader: 'file?name=[1].[ext]&options.regExp=node_modules/(.*)'
-    }],
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel?presets[]=es2015'
+      },
+      {
+        test: /\.html$/,
+        loader: 'html'
+      },
+      {
+        test: /\.?css$/,
+        loader: ExtractTextPlugin.extract('style', 'css!sass') //!autoprefixer?browser=last 2 versions'
+      },
+      {
+        test: /\.(ico|png|jpg|svg|ttf|eot|woff|woff2)$/,
+        loader: addHash('file?name=[path][name].[ext]', 'hash:6')
+        // loader: 'file?name=[1].[ext]&options.regExp=node_modules/(.*)'
+      }
+    ],
 
     noParse: /node_modules\/(bootstrap|jquery)/
   }
@@ -106,5 +102,12 @@ if ('production' === NODE_ENV) {
         unsafe: true
       }
     })
+  );
+  module.exports.plugins.push(
+    {
+      apply: (compiler) => {
+        'production' === NODE_ENV && rimraf.sync(compiler.options.output.path);
+      }
+    }
   );
 }

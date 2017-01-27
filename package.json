@@ -13,9 +13,8 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "start": "http-server dist/ -a 0.0.0.0 -p 8000 -o",
-    "build:dev": "set NODE_ENV=development&webpack -w",
-    "build:prod": "set NODE_ENV=production&webpack",
+    "start": "set NODE_ENV=developemnt&webpack-dev-server --inline --hot --open",
+    "build": "set NODE_ENV=production&webpack",
     "test": "mocha --compilers js:babel-core/register",
     "coverage": "istanbul cover --include-all-sources node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R spec test/",
     "coveralls": "cat coverage/lcov.info | coveralls",
@@ -38,7 +37,6 @@
     "file-loader": "^0.9.0",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "2.24.1",
-    "http-server": "^0.9.0",
     "istanbul": "^1.1.0-alpha.1",
     "jquery": "^3.1.1",
     "materialize-css": "^0.97.8",
@@ -49,7 +47,9 @@
     "sass-loader": "^4.1.1",
     "scss-loader": "0.0.1",
     "style-loader": "^0.13.1",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-dev-server": "^1.16.2"
   },
   "devDependencies": {}
 }
