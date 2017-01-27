@@ -69,7 +69,7 @@ module.exports = {
     },
     {
       test: /\.?css$/,
-      loader: ExtractTextPlugin.extract('style', 'css!sass') //!autoprefixer?browser=last 2 versions'
+      loader: ExtractTextPlugin.extract('css!sass') //!autoprefixer?browser=last 2 versions'
     },
     {
       test: /\.(ico|png|jpg|svg|ttf|eot|woff|woff2)$/,
