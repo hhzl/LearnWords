@@ -4,6 +4,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(NODE_ENV);
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: __dirname + '/app',
@@ -41,7 +42,8 @@ module.exports = {
       {
         from: __dirname + '/public'
       }
-    ])
+    ]),
+    new ExtractTextPlugin('styles.css')
   ],
 
   resolve: {
@@ -67,7 +69,7 @@ module.exports = {
     },
     {
       test: /\.?css$/,
-      loader: 'style!css!sass' //!autoprefixer?browser=last 2 versions'
+      loader: ExtractTextPlugin.extract('style', 'css!sass') //!autoprefixer?browser=last 2 versions'
     },
     {
       test: /\.(ico|png|jpg|svg|ttf|eot|woff|woff2)$/,
