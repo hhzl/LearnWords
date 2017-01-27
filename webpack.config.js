@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: '[name]-[hash].js',
+    filename: '[name].js', //'[name]-[hash].js',
     library: '[name]'
   },
 
@@ -58,7 +58,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /\/node_modules\//,
+      exclude: /node_modules/,
       loader: 'babel?presets[]=es2015'
     },
     {
@@ -70,11 +70,12 @@ module.exports = {
       loader: 'style!css' //!autoprefixer?browser=last 2 versions'
     },
     {
-      test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+      test: /\.(ico|png|jpg|svg|ttf|eot|woff|woff2)$/,
       loader: 'file?name=[path][name].[ext]'
+      // loader: 'file?name=[1].[ext]&regExp=node_modules/(.*)'
     }],
 
-    noParse: /\/node_modules\/(bootstrap|jquery)/
+    noParse: /node_modules\/(bootstrap|jquery)/
   }
 };
 
