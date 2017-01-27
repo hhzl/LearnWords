@@ -43,7 +43,7 @@ module.exports = {
         from: __dirname + '/public'
       }
     ]),
-    new ExtractTextPlugin('styles.css', {allChunks: true})
+    new ExtractTextPlugin('[name].css', {allChunks: true})
   ],
 
   resolve: {
