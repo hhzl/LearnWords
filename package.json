@@ -19,7 +19,7 @@
     "test": "mocha --compilers js:babel-core/register",
     "coverage": "istanbul cover --include-all-sources node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R spec test/",
     "coveralls": "cat coverage/lcov.info | coveralls",
-    "webpack": "set NODE_ENV=testing&webpack --profile --display-modules --display-reasons"
+    "webpack": "set NODE_ENV=testing&webpack --profile --display-modules --display-reasons --display-error-details"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-loader": "^0.4.4",
+    "html-webpack-plugin": "2.24.1",
     "http-server": "^0.9.0",
     "istanbul": "^1.1.0-alpha.1",
     "jquery": "^3.1.1",
@@ -44,6 +45,7 @@
     "mocha": "^3.2.0",
     "node-sass": "^4.3.0",
     "npm": "^4.1.2",
+    "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
     "scss-loader": "0.0.1",
     "style-loader": "^0.13.1",

@@ -5,14 +5,18 @@ console.log(NODE_ENV);
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const rimraf = require('rimraf');
 
 module.exports = {
   context: __dirname + '/app',
+  // context: __dirname + '/app/js',
   entry: __dirname + '/app/js/main',
+  // entry: './main',
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: '[name].js', //'[name]-[hash].js',
+    filename: '[name].[chunkhash].js',
     library: '[name]'
   },
 
@@ -43,7 +47,17 @@ module.exports = {
         from: __dirname + '/public'
       }
     ]),
-    new ExtractTextPlugin('[name].css', {allChunks: true})
+    new ExtractTextPlugin('[name].[contenthash].css', {allChunks: true}),
+    {
+      apply: (compiler) => {
+        rimraf.sync(compiler.options.output.path);
+      }
+    // }
+    },
+    new HtmlWebpackPlugin({
+      filename: './main.html',
+      chunks: ['common', 'main']
+    })
   ],
 
   resolve: {
@@ -73,8 +87,8 @@ module.exports = {
     },
     {
       test: /\.(ico|png|jpg|svg|ttf|eot|woff|woff2)$/,
-      loader: 'file?name=[path][name].[ext]'
-      // loader: 'file?name=[1].[ext]&regExp=node_modules/(.*)'
+      loader: 'file?name=[path][name].[hash:6].[ext]'
+      // loader: 'file?name=[1].[ext]&options.regExp=node_modules/(.*)'
     }],
 
     noParse: /node_modules\/(bootstrap|jquery)/
