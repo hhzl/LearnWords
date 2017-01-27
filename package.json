@@ -42,6 +42,7 @@
     "materialize-css": "^0.97.8",
     "mocha": "^3.2.0",
     "npm": "^4.1.2",
+    "scss-loader": "0.0.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
   },
