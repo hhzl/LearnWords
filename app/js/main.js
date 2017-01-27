@@ -6,7 +6,6 @@
 **************************************************/
 'use strict';
 
-// import '../css/bootstrap.min.css';
 import '../css/styles.scss';
 // import 'jquery';
 import 'bootstrap'; // remove after materialize-css will be implemented
