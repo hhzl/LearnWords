@@ -8,6 +8,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rimraf = require('rimraf');
 
+function addHash(template, hash) {
+  return 'production' === NODE_ENV ? template.replace(/\.[^.]+$/, `.[${hash}]$&`) : `${template}?hash=[${hash}]`;
+}
+
 module.exports = {
   context: __dirname + '/app',
   // context: __dirname + '/app/js',
@@ -16,11 +20,9 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: '[name].[chunkhash].js',
+    filename: addHash('[name].js', 'chunkhash'),
     library: '[name]'
   },
-
-  watch: 'development' === NODE_ENV,
 
   watchOptions: {
     aggregateTimeout: 100
@@ -47,7 +49,7 @@ module.exports = {
         from: __dirname + '/public'
       }
     ]),
-    new ExtractTextPlugin('[name].[contenthash].css', {allChunks: true}),
+    new ExtractTextPlugin(addHash('[name].css', 'contenthash'), {allChunks: true}),
     {
       apply: (compiler) => {
         rimraf.sync(compiler.options.output.path);
@@ -87,7 +89,7 @@ module.exports = {
     },
     {
       test: /\.(ico|png|jpg|svg|ttf|eot|woff|woff2)$/,
-      loader: 'file?name=[path][name].[hash:6].[ext]'
+      loader: addHash('file?name=[path][name].[ext]', 'hash:6')
       // loader: 'file?name=[1].[ext]&options.regExp=node_modules/(.*)'
     }],
 
