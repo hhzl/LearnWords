@@ -14,7 +14,7 @@
   "scripts": {
     "prestart": "npm install",
     "start": "set NODE_ENV=developemnt&webpack-dev-server --inline --hot --open",
-    "build": "set NODE_ENV=production&webpack",
+    "build": "set NODE_ENV=production&webpack --profile --display-modules --display-reasons --display-error-details",
     "test": "mocha --compilers js:babel-core/register",
     "coverage": "istanbul cover --include-all-sources node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R spec test/",
     "coveralls": "cat coverage/lcov.info | coveralls",

@@ -106,6 +106,7 @@ if ('production' === NODE_ENV) {
   module.exports.plugins.push(
     {
       apply: (compiler) => {
+        console.log(`Remove: ${compiler.options.output.path}`);
         'production' === NODE_ENV && rimraf.sync(compiler.options.output.path);
       }
     }
