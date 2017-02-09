@@ -10,9 +10,12 @@ import '../css/styles.scss';
 // import 'jquery';
 import 'bootstrap'; // remove after materialize-css will be implemented
 
-import LWClass from './utils/LW';
-const LW = new LWClass('LWdb');
-console.log(LW.isLocalStorageAvailable());
+import {browserStorage} from './browser-lsc-storage';
+console.log(browserStorage);
+const LW = new browserStorage.BrowserLocalStorageClass('LWdb');
+// import LWClass from './utils/LW';
+// const LW = new LWClass('LWdb');
+console.log(LW.readItem);
 
 import SettingsClass from '../components/settings/settings';
 const Settings = new SettingsClass();
