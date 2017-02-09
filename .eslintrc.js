@@ -1,4 +1,8 @@
-{
+module.exports = {
+  "extends": [
+    "eslint:recommended"
+    //"eslint:all"
+  ],
   "ecmaFeatures": {
     "arrowFunctions": true,
     "binaryLiterals": false,
