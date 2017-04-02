@@ -3,7 +3,7 @@
 ## TL;DR
 One page application for learning words by Leitner system.
 
-##Annotation
+## Annotation
 Started in *March 2014.* Developed with Twitter Bootstrap and jQuery. Responsive design, local storage, hashtag navigation, HTML-templates, localization.
 
 ## Documentation
