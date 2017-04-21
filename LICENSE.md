@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2016, Anatol Merezhanyi - https://github.com/e1r0nd/LearnWords
+Copyright (c) 2017, Anatol Merezhanyi - https://github.com/e1r0nd/LearnWords
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +25,3 @@ SOFTWARE.
 
 - Some original Bootstrap code and documentation http://getbootstrap.com
 `Copyright (c) 2011-2015, Twitter Inc.`
-
-- Some original MDL code http://www.getmdl.io/
-`Copyright (c) 2015, Google Inc.`
-
-- Some original Bootstrap Material Design code https://github.com/FezVrasta/bootstrap-material-design
-`Copyright (c) 2015-2016, Federico Zivolo and contributors`
