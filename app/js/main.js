@@ -1,16 +1,17 @@
-/**************************************************
-* Learn Words // main.js
-* coded by Anatol Marezhanyi aka e1r0nd//[CRG] - January 2017
-* http://linkedin.com/in/merezhany/ a.merezhanyi@gmail.com
-* Placed in public domain.
-**************************************************/
-'use strict';
-
+/**
+ * Learn Words by Leitner system
+ *
+ * @version 1.0.0
+ * @author Anatol Marezhanyi
+ */
 import '../css/styles.scss';
 // import 'jquery';
 import 'bootstrap'; // remove after materialize-css will be implemented
 
-import {browserStorage} from './browser-lsc-storage';
+import storage from 'browser-lsc-storage';
+console.log('storage:', storage);
+
+import { browserStorage } from './browser-lsc-storage';
 console.log(browserStorage);
 const LW = new browserStorage.BrowserLocalStorageClass('LWdb');
 // import LWClass from './utils/LW';
@@ -20,9 +21,9 @@ console.log(LW.readItem);
 import SettingsClass from '../components/settings/settings';
 const Settings = new SettingsClass();
 
-import {Utils} from './utils/utils';
+import { Utils } from './utils/utils';
 
-import {Memorystore} from './utils/memorystore';
+import { Memorystore } from './utils/memorystore';
 // load the default words set if needed
 if (LW.isOK && LW.isEmpty) {
   console.log('memorystore: start loading words');
@@ -30,22 +31,22 @@ if (LW.isOK && LW.isEmpty) {
   console.log('memorystore: words have been loaded');
 }
 
-import {Navigation} from './utils/navigation';
+import { Navigation } from './utils/navigation';
 Navigation.init();
 
-import {local} from './local/local';
+import { local } from './local/local';
 local.init();
 
-import {Vocabulary} from './actions/vocabulary';
+import { Vocabulary } from './actions/vocabulary';
 Vocabulary.init();
 Vocabulary.viewWord();
 
-import {Learn} from './actions/learn';
+import { Learn } from './actions/learn';
 Learn.init();
 Learn.recountIndexLearn();
 Learn.showWord();
 
-import {Repeat} from './actions/repeat';
+import { Repeat } from './actions/repeat';
 Repeat.init();
 Repeat.recountIndexRepeat();
 Repeat.showWord();
@@ -58,7 +59,7 @@ Settings.getSettings();
 
 // set user saved local
 if (local.currentLocal !== $('[data-type=lang-select].selected').data('lang')) {
-	$(`[data-lang=${local.currentLocal}]`).click();
-};
+  $(`[data-lang=${local.currentLocal}]`).click();
+}
 
 Utils.closeMobMenu();
