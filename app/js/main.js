@@ -5,17 +5,11 @@
  * @author Anatol Marezhanyi
  */
 import '../css/styles.scss';
-// import 'jquery';
-import 'bootstrap'; // remove after materialize-css will be implemented
+import 'jquery';
 
 import storage from 'browser-lsc-storage';
 console.log('storage:', storage);
-
-import { browserStorage } from './browser-lsc-storage';
-console.log(browserStorage);
-const LW = new browserStorage.BrowserLocalStorageClass('LWdb');
-// import LWClass from './utils/LW';
-// const LW = new LWClass('LWdb');
+const LW = storage.local;
 console.log(LW.readItem);
 
 import SettingsClass from '../components/settings/settings';
@@ -51,6 +45,7 @@ Repeat.init();
 Repeat.recountIndexRepeat();
 Repeat.showWord();
 
+/* global NODE_ENV, $ */
 if ('development' === NODE_ENV) {
   console.log(`development environment ${NODE_ENV}`);
 }

@@ -1,13 +1,15 @@
-@import url( '~bootstrap/dist/css/bootstrap.min.css');
+// @import url( '~bootstrap/dist/css/bootstrap.min.css');
 
 .content {
   text-align: justify;
 }
+$gray: #e5e5e5;
 
 .footer {
+  border-top: 1px solid $gray;
+  display: flex;
   margin-top: 45px;
   padding: 0 0 36px;
-  border-top: 1px solid #e5e5e5;
 }
 
 .nodisplay {
@@ -19,7 +21,7 @@
 }
 
 .selected {
-  font-weight: bold !important;
+  font-weight: bold;
 }
 
 .num-words {
