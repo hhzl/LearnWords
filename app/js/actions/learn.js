@@ -9,7 +9,6 @@
  **************************************************/
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
-import {Utils} from './../utils/utils';
 
 const Learn = {
   wordsLearn: [],
@@ -59,12 +58,16 @@ const Learn = {
 
   actionWord(step, reindex) {
     if (step) {
+      const getToday = () => {
+        const now = new Date();
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
+      };
       const word = {
         index: Learn.wordsLearn[Learn.currentIndex].index,
         word: Learn.wordsLearn[Learn.currentIndex].word,
         translate: Learn.wordsLearn[Learn.currentIndex].translate,
         step,
-        date: (1 === step) ? (Utils.getToday() + Utils.delay * Settings.params.first) : 0
+        date: (1 === step) ? (getToday() + 864000000 * Settings.params.first) : 0
       };
 
       LW.storeItem(`${LW.name}-${Learn.wordsLearn[Learn.currentIndex].index}`, word); //save word

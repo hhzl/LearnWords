@@ -4,7 +4,6 @@
  * http://linkedin.com/in/merezhany/ a.merezhanyi@gmail.com
  * Placed in public domain.
  **************************************************/
-import {Utils} from './utils';
 let Navigation = {};
 
 Navigation = {
@@ -40,7 +39,9 @@ Navigation = {
     });
     $(this).parent().addClass('active');
     $(`#${$(this).data('target')}`).removeClass('nodisplay');
-    Utils.closeMobMenu();
+    if ($('#bs-example-navbar-collapse-1').hasClass('in')) {
+      $('#navbarToggle').click();
+    }
   },
 
   init() {

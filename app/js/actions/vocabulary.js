@@ -6,7 +6,6 @@
  **************************************************/
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
-import {Utils} from './../utils/utils';
 import {Learn} from './learn';
 import {Repeat} from './repeat';
 
@@ -85,19 +84,19 @@ const Vocabulary = {
     let error = false;
     let word = {};
 
-    Utils.clearFields();
+    Vocabulary.clearFields();
     //check for empty fields
     if (!inputWord) {
-      error = Utils.setFieldError(form.children(':nth-child(1)').children(':nth-child(1)'));
+      error = Vocabulary.setFieldError(form.children(':nth-child(1)').children(':nth-child(1)'));
     } else if (!inputTranslate) {
-      error = Utils.setFieldError(form.children(':nth-child(2)').children(':nth-child(1)'));
+      error = Vocabulary.setFieldError(form.children(':nth-child(2)').children(':nth-child(1)'));
     }
     if (error) { //show error if any
       $(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
       $(Vocabulary.errorVocabulary).text(local[local.currentLocal].errorEmpty);
     } else { //otherwise save new word to Vocabulary
       let newIndexVal;
-      const todayDate = Utils.getToday(true);
+      const todayDate = new Date().valueOf();
       word = {
         index: todayDate,
         word: inputWord,
@@ -128,7 +127,7 @@ const Vocabulary = {
       }
 
       LW.storeItem(`${LW.name}-words`, LW.index.join()); //add word to Vocabulary list
-      Utils.clearFields();
+      Vocabulary.clearFields();
       Vocabulary.recountTotal();
       Learn.wordsLearn = [];
       Learn.recountIndexLearn();
@@ -136,18 +135,30 @@ const Vocabulary = {
     }
   },
 
+  clearFields() {
+    $('.form-group').each((i, node) => { //clear all error styles
+      $(node).removeClass('has-error');
+    });
+    $('#errorSettings').addClass('nodisplay');
+  },
+
+  setFieldError(self) { //set the error style for the current input field
+    $(self).addClass('has-error');
+    return true;
+  },
+
   init() {
-    $(document).on('click touchstart', '#addBtn', () => {
+    $(document).on('click', '#addBtn', () => {
       Vocabulary.addSaveWord($(Vocabulary.inputWordTxt), $(Vocabulary.inputTranslate), $(Vocabulary.addWordForm), true);
     });
-    $(document).on('click touchstart', '.js-edit-btn', function () {
+    $(document).on('click', '.js-edit-btn', function () {
       $(`#${$(this).data('node')}`).hide();
       $(`#${$(this).data('node')}Edit`).show();
     });
-    $(document).on('click touchstart', '.js-save-btn', function () {
+    $(document).on('click', '.js-save-btn', function () {
       Vocabulary.addSaveWord($(`#word-${$(this).data('node')}`), $(`#translate-${$(this).data('node')}`), $(`#form-${$(this).data('node')}`));
     });
-    $(document).on('click touchstart', '.js-del-btn', function () {
+    $(document).on('click', '.js-del-btn', function () {
       Vocabulary.removeWord(this);
     });
   }

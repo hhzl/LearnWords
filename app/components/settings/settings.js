@@ -20,8 +20,10 @@ export default class SettingsClass {
 
     this.params = {};
 
-    $(document).on('click touchstart', '#saveSettings', this.saveSetting);
-    $(document).on('click touchstart', '#cancelSettings', this.cancelSetting);
+    this.self = this;
+
+    $(document).on('click', '#saveSettings', this.saveSetting.bind(this));
+    $(document).on('click', '#cancelSettings', this.cancelSetting.bind(this));
   }
   getSettings() { //read setting's values
     const storedSettings = LW.getSettings();
@@ -43,28 +45,28 @@ export default class SettingsClass {
     let errorName = '';
     let error = false;
 
-    Utils.clearFields();
+    this.self.clearFields();
     //check for empty fields
     if (!first) {
-      error = Utils.setFieldError(form.children(':nth-child(1)'));
+      error = this.self.setFieldError(form.children(':nth-child(1)'));
       errorName = 'empty';
     } else if (!second) {
-      error = Utils.setFieldError(form.children(':nth-child(2)'));
+      error = this.self.setFieldError(form.children(':nth-child(2)'));
       errorName = 'empty';
     } else if (!third) {
-      error = Utils.setFieldError(form.children(':nth-child(3)'));
+      error = this.self.setFieldError(form.children(':nth-child(3)'));
       errorName = 'empty';
     } else { //only digits is valid
-      if (!Utils.isNumber(first)) {
-        error = Utils.setFieldError(form.children(':nth-child(1)'));
+      if (!this.self.isNumber(first)) {
+        error = this.self.setFieldError(form.children(':nth-child(1)'));
         errorName = 'number';
       };
-      if (!Utils.isNumber(second)) {
-        error = Utils.setFieldError(form.children(':nth-child(2)'));
+      if (!this.self.isNumber(second)) {
+        error = this.self.setFieldError(form.children(':nth-child(2)'));
         errorName = 'number';
       };
-      if (!Utils.isNumber(third)) {
-        error = Utils.setFieldError(form.children(':nth-child(3)'));
+      if (!this.self.isNumber(third)) {
+        error = this.self.setFieldError(form.children(':nth-child(3)'));
         errorName = 'number';
       };
     }
@@ -84,8 +86,29 @@ export default class SettingsClass {
     }
   }
 
-    cancelSetting() {
-      Utils.clearFields();
-      this.getSettings();
-    }
+  cancelSetting() {
+    this.clearFields();
+    this.getSettings();
+  }
+
+  isNumber(str, withDot) {
+    //validate filed for number value
+    const NumberReg = /^\d+$/;
+    const NumberWithDotReg = /^[-+]?[0-9]*\.?[0-9]+$/;
+
+    return withDot ? NumberWithDotReg.test(str) : NumberReg.test(str);
+  }
+
+  clearFields() {
+    $('.form-group').each((i, node) => { //clear all error styles
+      $(node).removeClass('has-error');
+    });
+    $('#errorSettings').addClass('nodisplay');
+  }
+
+  setFieldError(self) { //set the error style for the current input field
+    $(self).addClass('has-error');
+    return true;
+  }
+
 };

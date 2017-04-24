@@ -15,8 +15,6 @@ console.log(LW.readItem);
 import SettingsClass from '../components/settings/settings';
 const Settings = new SettingsClass();
 
-import { Utils } from './utils/utils';
-
 import { Memorystore } from './utils/memorystore';
 // load the default words set if needed
 if (LW.isOK && LW.isEmpty) {
@@ -56,5 +54,3 @@ Settings.getSettings();
 if (local.currentLocal !== $('[data-type=lang-select].selected').data('lang')) {
   $(`[data-lang=${local.currentLocal}]`).click();
 }
-
-Utils.closeMobMenu();

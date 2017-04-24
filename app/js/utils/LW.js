@@ -11,7 +11,7 @@ export default class LWClass {
  constructor(dbName) {
    this.isOK = false;
    if (!this.isLocalStorageAvailable()) {
-     alert('Local Storage is not available.');
+     console.log('Local Storage is not available.');
      return false;
    };
    this.name = dbName;

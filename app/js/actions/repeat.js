@@ -6,8 +6,6 @@
  **************************************************/
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
-import {Utils} from './../utils/utils';
-import {Learn} from './learn';
 
 import SettingsClass from '../../components/settings/settings';
 const Settings = new SettingsClass();
@@ -29,13 +27,18 @@ const Repeat = {
   noWordsRepeat: $('#noWordsRepeat'),
   enterBtn: $('#enterBtn'),
 
+  getToday() {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
+  },
+
   recountIndexRepeat() {
     //count words to Repeat
     if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
       $(LW.index).each((index, node) => { //the initial counting
         const item = LW.readItem(`${LW.name}-${node}`);
         if (item) {
-          if (Utils.getToday() > item.date) { //if this word is for today
+          if (this.getToday() > item.date) { //if this word is for today
             if (1 === item.step) {
               Repeat.wordsRepeat.first.push(item);
             } else if (2 === item.step) {
@@ -61,7 +64,7 @@ const Repeat = {
     if (0 === index) {
       wordPlaceholder = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0][(Repeat.wordsRepeat.first.length) ? 'translate' : 'word'];
     } else {
-      wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][Utils.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length - 1)];
+      wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][Repeat.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length - 1)];
     }
 
     if (arrWords.includes(wordPlaceholder)) {
@@ -80,7 +83,7 @@ const Repeat = {
 
       const arrOptionButtons = $('[data-type=checkWordBtn]');
       //the answer buttons are shuffled so that we don't know which one is the correct word.
-      Utils.shuffle(arrOptionButtons);
+      Repeat.shuffle(arrOptionButtons);
 
       arrOptionButtons.each(function (index) {
 
@@ -137,16 +140,16 @@ const Repeat = {
 
     if ($(self).text() === ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)) {
       word.step++;
-      word.date = Utils.getToday() + Utils.delay * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
+      word.date = this.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
     } else {
       word.step--;
-      word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + Utils.delay * Settings.params.first;
+      word.date = (Repeat.wordsRepeat.first.length) ? 0 : this.getToday() + 864000000 * Settings.params.first;
     }
     LW.storeItem(`${LW.name}-${word.index}`, word); //save word
     Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
-    Learn.wordsLearn = [];
-    Learn.recountIndexLearn();
-    Learn.showWord();
+    // Learn.wordsLearn = [];
+    // Learn.recountIndexLearn();
+    // Learn.showWord();
     Repeat.recountIndexRepeat();
     Repeat.showWord();
   },
@@ -163,22 +166,38 @@ const Repeat = {
       word.date = 0;
     } else {
       word.step--;
-      word.date = Utils.getToday() + Utils.delay * Settings.params.second;
+      word.date = this.getToday() + 864000000 * Settings.params.second;
     };
     LW.storeItem(`${LW.name}-${word.index}`, word); //save word
     Repeat.wordsRepeat.third.splice(0, 1); //remove from index
-    Learn.wordsLearn = [];
-    Learn.recountIndexLearn();
-    Learn.showWord();
+    // Learn.wordsLearn = [];
+    // Learn.recountIndexLearn();
+    // Learn.showWord();
     Repeat.recountIndexRepeat();
     Repeat.showWord();
   },
 
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  },
+
+  shuffle(a) {
+    let j;
+    let x;
+    let i;
+    for (i = a.length; i; i--) {
+      j = Math.floor(Math.random() * i);
+      x = a[i - 1];
+      a[i - 1] = a[j];
+      a[j] = x;
+    }
+  },
+
   init() {
-    $(document).on('click touchstart', '[data-type=checkWordBtn]', function () {
+    $(document).on('click', '[data-type=checkWordBtn]', function () {
       Repeat.checkWord(this);
     });
-    $(document).on('click touchstart', '#enterBtn', Repeat.repeatWord);
+    $(document).on('click', '#enterBtn', Repeat.repeatWord);
   }
 };
 
