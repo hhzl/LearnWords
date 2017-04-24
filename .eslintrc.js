@@ -183,6 +183,7 @@ module.exports = {
     "operator-assignment": [1, "never"],
     "padded-blocks": [0, "never"],
     "quote-props": [0, "as-needed"],
+    "quotes": ["error", "double"],
     "semi-spacing": [1, { "before": false, "after": true }],
     "semi": [1, "always"],
     "sort-vars": 0,

@@ -15,7 +15,7 @@ function addHash(template, hash) {
 }
 
 module.exports = {
-  entry: path.join(__dirname, "/app/js/main"),
+  entry: path.join(__dirname, "/app/main"),
   output: {
     path: path.join(__dirname, "/dist"),
     publicPath: "/",
