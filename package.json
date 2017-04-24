@@ -23,7 +23,7 @@
   },
   "scripts": {
     "prebuild": "npm install",
-    "start": "set NODE_ENV=developemnt&webpack-dev-server --inline --hot --open",
+    "start": "set NODE_ENV=development&webpack-dev-server --inline --hot --open",
     "build": "set NODE_ENV=production&webpack --profile --display-modules --display-reasons --display-error-details",
     "lint": "eslint app/**/*.js",
     "test": "mocha --compilers js:babel-core/register",
@@ -35,6 +35,7 @@
     "url": "git+https://github.com/e1r0nd/learnwords.git"
   },
   "dependencies": {
+    "autoprefixer": "^6.7.7",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",

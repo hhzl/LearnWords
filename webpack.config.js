@@ -5,6 +5,7 @@ const webpack = require("webpack");
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const rimraf = require("rimraf");
@@ -18,7 +19,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/dist"),
     publicPath: "/",
-    filename: addHash("[name].js", "developemnt" === NODE_ENV ? "hash" : "chunkhash"),
+    filename: addHash("[name].js", "development" === NODE_ENV ? "hash" : "chunkhash"),
     library: "[name]",
   },
 
@@ -49,6 +50,12 @@ module.exports = {
       allChunks: true,
       disable: "production" !== NODE_ENV,
     }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      options: {
+        postcss: [autoprefixer],
+      },
+    }),
     new HtmlWebpackPlugin({
       filename: "index.html",
       chunks: ["common", "main"],
@@ -65,11 +72,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader?presets[]=es2015",
+        use: "babel-loader?presets[]=es2015",
       },
       {
         test: /\.html$/,
-        loader: "html-loader",
+        use: "html-loader",
       },
       {
         test: /\.?css$/,
