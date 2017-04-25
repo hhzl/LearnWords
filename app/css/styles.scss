@@ -20,26 +20,13 @@
   font-weight: normal;
 }
 
-.inp-fld {
-  display: inline-block;
-  width: 80%;
-}
-
 .form-group-right {
   text-align: right;
 }
 @media (min-width: 768px) and (max-width: 992px) {
-  .inp-fld {
-    display: inline-block;
-    width: 69%;
-  }
+  // empty
 }
 @media (max-width: 768px) {
-  .inp-fld {
-    display: inline-block;
-    width: 70%;
-  }
-
   .add-btn {
     width: 50%;
   }

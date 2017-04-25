@@ -1,0 +1,17 @@
+.inp-fld {
+  display: inline-block;
+  width: 80%;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .inp-fld {
+    display: inline-block;
+    width: 69%;
+  }
+}
+@media (max-width: 768px) {
+  .inp-fld {
+    display: inline-block;
+    width: 70%;
+  }
+}

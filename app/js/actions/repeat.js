@@ -7,7 +7,7 @@
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
 
-import SettingsClass from '../../components/settings/settings';
+import SettingsClass from '../../components/settings';
 const Settings = new SettingsClass();
 
 const Repeat = {

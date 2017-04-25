@@ -1,19 +1,24 @@
 /**
- * Learn Words by Leitner system
- *
- * @version 1.0.0
- * @author Anatol Marezhanyi
+ * @file Learn Words by Leitner system
+ * @copyright Anatol Marezhanyi 2017
+ * @version 2.0.0-aplha
  */
 import "./css/styles.scss";
 import "jquery";
 
 import storage from "browser-lsc-storage";
-console.log("storage:", storage);
 const LW = storage.local;
-console.log(LW.readItem);
+LW.prefix = "LWdb";
 
-import SettingsClass from "./components/settings/settings";
+/* Create Main container for all components */
+const Main = document.createElement("div");
+Main.className = "container";
+
+/* Import all components and inject into Main container */
+import SettingsClass from "./components/settings";
 const Settings = new SettingsClass();
+console.log(Settings);
+Main.appendChild(Settings.createBlock());
 
 import { Memorystore } from "./js/utils/memorystore";
 // load the default words set if needed
@@ -43,24 +48,16 @@ Repeat.init();
 Repeat.recountIndexRepeat();
 Repeat.showWord();
 
-/* global NODE_ENV, $ */
-if ("development" === NODE_ENV) {
-  console.log(`development environment ${NODE_ENV}`);
-}
-// read settings
-Settings.getSettings();
-
 // set user saved local
 if (local.currentLocal !== $("[data-type=lang-select].selected").data("lang")) {
   $(`[data-lang=${local.currentLocal}]`).click();
 }
 
-const Main = document.createElement("div");
-Main.className = "container";
-
 import Footer from "./components/Footer";
-console.log(Footer);
 Main.appendChild(Footer);
 
 /* Create a document after all */
 document.querySelector("body").appendChild(Main);
+
+// Init settings, add event listeners
+Settings.init();
