@@ -6,8 +6,7 @@ import input from "../Input";
 import storage from "browser-lsc-storage";
 const localStorage = storage.local;
 localStorage.prefix = "LWdb";
-import { local } from "../../js/local/local";
-local.init();
+import { locale } from "../../actions/Locale";
 
 export default class SettingsClass {
   constructor() {
@@ -65,7 +64,7 @@ export default class SettingsClass {
     this.inputSecondCheck.value = settings.second;
     this.inputThirdCheck.value = settings.third;
 
-    this.params = settings; // store local
+    this.params = settings; // store locale
   }
 
   saveSetting() {
@@ -109,16 +108,16 @@ export default class SettingsClass {
     }
     if (error) { // show error if any
       const errorTxt = ("empty" === errorName)
-        ? local[local.currentLocal].errorEmpty
-        : local[local.currentLocal].errorValid;
+        ? locale[locale.currentlocale].errorEmpty
+        : locale[locale.currentlocale].errorValid;
       this.errorSettings.classList.remove("nodisplay");
       this.errorSettings.innerText = errorTxt;
     } else { // otherwise save new settings
       this.putSettings(settings);
       this.errorSettings.classList.remove("nodisplay");
-      this.errorSettings.innerText = local[local.currentLocal].errorNo;
+      this.errorSettings.innerText = locale[locale.currentlocale].errorNo;
 
-      this.params = settings; // store local
+      this.params = settings; // store locale
     }
 
     return false;

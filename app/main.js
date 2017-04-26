@@ -6,9 +6,9 @@
 import "./css/styles.scss";
 import "jquery";
 
-import storage from "browser-lsc-storage";
-const LW = storage.local;
-LW.prefix = "LWdb";
+import Storage from "browser-lsc-storage";
+const storage = Storage.local;
+storage.prefix = "LWdb";
 
 /* Create Main container for all components */
 const Main = document.createElement("div");
@@ -22,17 +22,14 @@ Main.appendChild(Settings.createBlock());
 
 import { Memorystore } from "./js/utils/memorystore";
 // load the default words set if needed
-if (LW.isOK && LW.isEmpty) {
+if (storage.isOK && storage.isEmpty) {
   console.log("memorystore: start loading words");
-  LW.loadWords(Memorystore);
+  storage.loadWords(Memorystore);
   console.log("memorystore: words have been loaded");
 }
 
 import { Navigation } from "./js/utils/navigation";
 Navigation.init();
-
-import { local } from "./js/local/local";
-local.init();
 
 import { Vocabulary } from "./js/actions/vocabulary";
 Vocabulary.init();
@@ -48,16 +45,13 @@ Repeat.init();
 Repeat.recountIndexRepeat();
 Repeat.showWord();
 
-// set user saved local
-if (local.currentLocal !== $("[data-type=lang-select].selected").data("lang")) {
-  $(`[data-lang=${local.currentLocal}]`).click();
-}
-
 import Footer from "./components/Footer";
 Main.appendChild(Footer);
 
 /* Create a document after all */
 document.querySelector("body").appendChild(Main);
 
-// Init settings, add event listeners
+// Init Settings, add event listeners
 Settings.init();
+import { locale } from "./actions/Locale";
+locale.init();
