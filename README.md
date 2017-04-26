@@ -9,13 +9,12 @@ One page application for learning words by Leitner system.
 Started in *March 2014.* Developed with Twitter Bootstrap and jQuery. Responsive design, local storage, hashtag navigation, HTML-templates, localization.
 
 ## Documentation
-[How to create a file memorystore.js](AboutMemorystore.md)
+[User Manual](docs/UserManual.md)
+[How to create a file memorystore.js](docs/AboutMemorystore.md)
 
 ## Author
-coded by Anatol Marezhanyi aka e1r0nd//[CRG]
-
+Anatol Marezhanyi @e1r0nd_crg<br>
 http://linkedin.com/in/merezhany/<br>
-a.merezhanyi@gmail.com
 
 ## Contributors
 Hannes Hirzel https://github.com/hhzl<br>
