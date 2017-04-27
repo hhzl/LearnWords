@@ -11,7 +11,6 @@ import { locale } from "../../actions/Locale";
 export default class SettingsClass {
   constructor() {
     this.params = {};
-    this.self = this;
   }
 
   createBlock() {
@@ -77,32 +76,32 @@ export default class SettingsClass {
       second,
       third,
     };
-    // const form = $(this.self.settingFrom);
+    // const form = $(this.settingFrom);
     let errorName = "";
     let error = false;
 
-    this.self.clearFields();
+    this.clearFields();
     // check for empty fields
     if (!first) {
-      error = this.self.setFieldError(this.self.inputFirstCheck);
+      error = this.setFieldError(this.inputFirstCheck);
       errorName = "empty";
     } else if (!second) {
-      error = this.self.setFieldError(this.self.inputSecondCheck);
+      error = this.setFieldError(this.inputSecondCheck);
       errorName = "empty";
     } else if (!third) {
-      error = this.self.setFieldError(this.self.inputThirdCheck);
+      error = this.setFieldError(this.inputThirdCheck);
       errorName = "empty";
     } else { // only digits is valid
-      if (!this.self.isNumber(first)) {
-        error = this.self.setFieldError(this.self.inputFirstCheck);
+      if (!this.isNumber(first)) {
+        error = this.setFieldError(this.inputFirstCheck);
         errorName = "number";
       }
-      if (!this.self.isNumber(second)) {
-        error = this.self.setFieldError(this.self.inputSecondCheck);
+      if (!this.isNumber(second)) {
+        error = this.setFieldError(this.inputSecondCheck);
         errorName = "number";
       }
-      if (!this.self.isNumber(third)) {
-        error = this.self.setFieldError(this.self.inputThirdCheck);
+      if (!this.isNumber(third)) {
+        error = this.setFieldError(this.inputThirdCheck);
         errorName = "number";
       }
     }

@@ -39,8 +39,8 @@ const Learn = {
     const wordsLearnLength = (Learn.wordsLearn.length) ? Learn.wordsLearn.length : '';
 
     $(learnWordsNum).text(wordsLearnLength || '0');
-    $(learnWordsTopNum).text(wordsLearnLength);
-    $(learnWordsTopSNum).text(wordsLearnLength);
+    // $(learnWordsTopNum).text(wordsLearnLength);
+    // $(learnWordsTopSNum).text(wordsLearnLength);
   },
 
   showWord() { //show a next word to learn
@@ -101,9 +101,9 @@ const Learn = {
   },
 
   init() {
-    $(document).on('click touchstart', '#rememberBtn', Learn.rememberWord);
-    $(document).on('click touchstart', '#repeatBtn', Learn.repeatWord);
-    $(document).on('click touchstart', '#knownBtn', Learn.knownWord);
+    $(document).on('click', '#rememberBtn', Learn.rememberWord);
+    $(document).on('click', '#repeatBtn', Learn.repeatWord);
+    $(document).on('click', '#knownBtn', Learn.knownWord);
   }
 };
 

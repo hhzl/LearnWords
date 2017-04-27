@@ -55,8 +55,8 @@ const Repeat = {
     const wordsRepeatLength = (wordsRepeatTotal) ? wordsRepeatTotal : '';
 
     $(repeatWordsNum).text(wordsRepeatLength || '0');
-    $(repeatWordsTopNum).text(wordsRepeatLength);
-    $(repeatWordsTopSNum).text(wordsRepeatLength);
+    // $(repeatWordsTopNum).text(wordsRepeatLength);
+    // $(repeatWordsTopSNum).text(wordsRepeatLength);
   },
 
   getWord(index, arrWords) {

@@ -5,7 +5,6 @@ import enGB from "../../i18n/locale-en.json";
 import ruRU from "../../i18n/locale-ru.json";
 import deDE from "../../i18n/locale-de.json";
 
-console.log("define locale");
 const locale = {
   en_GB: enGB,
   de_DE: deDE,
@@ -23,15 +22,14 @@ const locale = {
     });
   },
 
-  langSelect() { // change localization
+  langSelect(e) { // change localization
+    e.preventDefault();
     locale.currentlocale = this.dataset.lang;
     // document.querySelector("#langSelect").click();
     // document.querySelector(".navbar-toggle:visible").click();
     locale.changelocaleContent();
     cookies.key("language", locale.currentlocale);
     this.classList.add("selected");
-
-    return false;
   },
 
   init() {
