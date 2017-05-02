@@ -2,7 +2,9 @@
 
 ## Summary
 
-**Total words learned**
+**Total words**<br>
+**Words to learn**<br>
+**Words to repeat**
 
 ## Learn Mode
 
